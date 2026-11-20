@@ -163,22 +163,22 @@
 
     // 5. Accessible Technical Dossier Modal (Escape, backdrop click, focus return)
     const backdrop = document.getElementById("dossier-backdrop");
-    const closeBtn = document.getElementById("dossier-close-btn");
     let lastTrigger = null;
 
     function openDossier(studyId, triggerEl) {
       if (!backdrop) return;
       const sections = backdrop.querySelectorAll("[data-dossier-panel]");
-      let found = false;
+      let activePanel = null;
       sections.forEach(function (sec) {
         const match = sec.getAttribute("data-dossier-panel") === studyId;
         sec.hidden = !match;
-        if (match) found = true;
+        if (match) activePanel = sec;
       });
-      if (!found) return;
+      if (!activePanel) return;
       lastTrigger = triggerEl || document.activeElement;
       backdrop.hidden = false;
-      if (closeBtn) closeBtn.focus();
+      const closeTarget = activePanel.querySelector("[data-close-dossier]");
+      if (closeTarget) closeTarget.focus();
     }
 
     function closeDossier() {
@@ -196,9 +196,9 @@
       });
     });
 
-    if (closeBtn) {
-      closeBtn.addEventListener("click", closeDossier);
-    }
+    document.querySelectorAll("[data-close-dossier]").forEach(function (btn) {
+      btn.addEventListener("click", closeDossier);
+    });
     if (backdrop) {
       backdrop.addEventListener("click", function (ev) {
         if (ev.target === backdrop) closeDossier();
