@@ -50,18 +50,19 @@
 
         <div class="project-head">
           <h3>isa-audit</h3>
-          <span class="project-meta">Rust, 2026</span>
+          <span class="project-meta">Rust, v0.2.0 (2026)</span>
         </div>
 
         <p class="body-p">
-          A zero-dependency x86-64 ELF64 binary auditor and CI gate written in safe Rust (<code>#![forbid(unsafe_code)]</code>). It scans executable ELF sections, decodes legacy, REX, VEX, and EVEX encodings, and fails builds with exact addresses and symbol offsets if forbidden extensions (such as FMA3, AVX2, or AVX-512) slip into portable binaries or instruction-lowering passes.
+          A zero-dependency x86-64 ELF64 binary auditor and CI gate written in safe Rust (<code>#![forbid(unsafe_code)]</code>). It scans executable ELF sections, decodes legacy, REX, VEX, and EVEX encodings, compares build-to-build ISA regressions via <code>isa-audit diff --fail-on-regression</code>, and fails CI with exact addresses and symbol offsets if forbidden extensions (such as FMA3, AVX2, or AVX-512) slip into portable binaries or instruction-lowering passes.
         </p>
         <p class="body-p">
-          Compiled release binary is 427 KB and decodes <code>/usr/bin/objdump</code> at 281.6 MiB/s (70.1 million instructions per second) with zero recovery steps. Tested in GitHub Actions across Linux, macOS, and Windows alongside six live <code>g++ -O2</code> kernel compilations.
+          Compiled release binary is 427 KB and decodes <code>/usr/bin/objdump</code> at 281.6 MiB/s (70.1 million instructions per second) with zero recovery steps. Tested in GitHub Actions across Linux, macOS, and Windows alongside six live <code>g++ -O2</code> kernel compilations, with automated prebuilt binaries and SHA-256 checksums published on GitHub Releases.
         </p>
 
         <div class="project-links">
           <a href="https://github.com/alexander-src/isa-audit" target="_blank" rel="noopener noreferrer">Source code on GitHub</a>
+          <a href="https://github.com/alexander-src/isa-audit/releases/tag/v0.2.0" target="_blank" rel="noopener noreferrer">v0.2.0 releases</a>
           <a href="case-studies/isa-audit.html">Read the engineering write-up</a>
         </div>
 
@@ -110,15 +111,15 @@
         <h2>Working on next</h2>
         <ul class="item-list">
           <li>
-            <h3>AnyPS5 binary relinking ecosystem</h3>
+            <h3>Upstream open-source contributions</h3>
             <p>
-              Studying C++20 x86-64 binary relinking and <code>--to-avx</code> instruction lowering in <a href="https://github.com/boykopovar/AnyPS5" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5</a>. Merged upstream pull requests will be linked here as they land under <code>alexander-src</code>.
+              Contributing performance and static-analysis fixes to <a href="https://github.com/boykopovar/AnyPS5" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5</a> (C++20/Python x86-64 relinking tooling) and <a href="https://github.com/oxc-project/oxc" target="_blank" rel="noopener noreferrer">oxc-project/oxc</a> (Rust JavaScript/TypeScript linter). Merged pull requests will be linked here as they land under <code>alexander-src</code>.
             </p>
           </li>
           <li>
-            <h3>Compiler-verified triage agent</h3>
+            <h3>bincompat: Linux ELF portability and hardening gate</h3>
             <p>
-              Designing an AST-indexed C++ debugging helper that compiles and tests candidate patches inside a sandboxed loop, paired with a public benchmark suite measuring pass rate and caught compiler errors.
+              Designing a zero-dependency Rust CLI that parses ELF <code>VERNEED</code>, <code>VERSYM</code>, and <code>DYNSYM</code> tables to pinpoint exact offending <code>GLIBC</code> and <code>GLIBCXX</code> symbols, verify <code>PIE</code>/<code>NX</code>/<code>RELRO</code>/canary hardening flags, and diff binary compatibility regressions in CI.
             </p>
           </li>
         </ul>

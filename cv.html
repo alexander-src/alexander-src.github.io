@@ -293,7 +293,7 @@
             <li>Built a zero-dependency, <code>#![forbid(unsafe_code)]</code> ELF64 parser and x86-64 decoder supporting legacy, REX, VEX2, VEX3, and EVEX encodings with <code>STT_FUNC</code> boundary resynchronization and a 427 KB stripped binary footprint.</li>
             <li>Measured 281.6 MiB/s (70.1M instructions/sec) single-threaded decode throughput with 0 recovery steps on real Linux binaries (<code>/usr/bin/objdump</code>, <code>/usr/bin/ls</code>, and self-hosted release builds).</li>
             <li>Wrote a deterministic test suite compiling 6 live C++ ISA kernels with <code>g++ -O2</code> plus byte-by-byte ELF truncation fuzzing, catching and fixing two real defects: <code>ET_REL</code> <code>st_value == 0</code> symbol drops and baseline <code>tzcnt</code> (<code>rep bsf</code>) false positives.</li>
-            <li>Implemented target profile checks (<code>x86-64-v1..v4</code>, <code>avx-no-fma</code>) with semantic exit codes, RFC 8259 JSON, and GitHub Code Scanning SARIF 2.1.0 output under multi-OS GitHub Actions CI.</li>
+            <li>Implemented target profile checks (<code>x86-64-v1..v4</code>, <code>avx-no-fma</code>), build-to-build regression diffing (<code>isa-audit diff --fail-on-regression</code>), semantic exit codes, RFC 8259 JSON, and GitHub Code Scanning SARIF 2.1.0 output with automated Linux, macOS, and Windows GitHub Releases (<code>v0.2.0</code>).</li>
           </ul>
         </div>
 
@@ -313,11 +313,11 @@
         <h2>Open-Source &amp; Systems Focus</h2>
         <div class="entry">
           <div class="entry-head">
-            <div class="entry-title">x86-64 Binary Relinking Ecosystem (<code>boykopovar/AnyPS5</code>)</div>
-            <div class="entry-meta">C++20, x86-64, Open Source</div>
+            <div class="entry-title">Systems Tooling, Linters &amp; Binary Relinking (<code>boykopovar/AnyPS5</code>, <code>oxc-project/oxc</code>)</div>
+            <div class="entry-meta">Rust, C++20, Python, Open Source</div>
           </div>
           <ul>
-            <li>Studying C++20 binary relinking, <code>--to-avx</code> instruction-lowering verification, and companion diagnostic tooling aligned with upstream build and AI-disclosure standards.</li>
+            <li>Contributing locally verified performance optimizations, static-analysis rule fixes, and x86-64 diagnostic tooling aligned with upstream CI, testing, and AI-disclosure standards.</li>
           </ul>
         </div>
       </section>
