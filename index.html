@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alexander (alexander-src) | Systems and AI-Native Software Engineer</title>
+  <meta name="description" content="Portfolio and technical CV of Alexander (alexander-src). Rust and C++20 systems tooling, x86-64 ELF binary auditing, and spec-driven AI engineering.">
+  <meta property="og:title" content="Alexander (alexander-src) | Systems and AI-Native Software Engineer">
+  <meta property="og:description" content="Zero-dependency x86-64 binary verification, compiler-grounded testing, and systems engineering.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alexander-src.github.io/">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/profile.js" defer></script>
+  <script src="assets/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-bar">
+        <a class="wordmark" href="index.html">alexander-src</a>
+
+        <nav class="nav-desktop" aria-label="Primary">
+          <a href="#work">Selected work</a>
+          <a href="#tracks">Roadmap &amp; open source</a>
+          <a href="#method">How I work</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-controls">
+          <button id="theme-toggle" class="btn btn-quiet" type="button" aria-pressed="false">Dark mode</button>
+          <a class="btn btn-accent" href="cv.html">Printable CV</a>
+          <button id="menu-toggle" class="btn btn-quiet menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-drawer">Menu</button>
+        </div>
+      </div>
+
+      <nav id="mobile-drawer" class="mobile-drawer" aria-label="Mobile navigation" hidden>
+        <a href="#work">Selected work</a>
+        <a href="#tracks">Roadmap &amp; open source</a>
+        <a href="#method">How I work</a>
+        <a href="#contact">Contact</a>
+        <a href="case-studies/isa-audit.html">isa-audit case study</a>
+        <a href="cv.html">Printable 1-page CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Asymmetric Editorial Masthead -->
+    <section class="masthead">
+      <div class="container masthead-grid">
+        <div>
+          <h1>Systems tooling and verified AI-assisted engineering.</h1>
+          <p class="masthead-lead">
+            I am <span data-profile-name>Alexander</span> (<code>alexander-src</code>). I write low-level tooling in Rust and C++20 and use AI coding agents under upfront specifications, live compiler checks, and real binary tests.
+          </p>
+          <div class="action-row">
+            <a class="btn btn-accent" href="case-studies/isa-audit.html">Read isa-audit case study</a>
+            <a class="btn" href="cv.html">Open printable 1-page CV</a>
+            <a class="btn" href="https://github.com/alexander-src" target="_blank" rel="noopener noreferrer">View GitHub profile</a>
+          </div>
+        </div>
+
+        <table class="facts-table" aria-label="Engineer profile summary">
+          <tbody>
+            <tr>
+              <th scope="row">Handle</th>
+              <td><a href="https://github.com/alexander-src" target="_blank" rel="noopener noreferrer">github.com/alexander-src</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Focus</th>
+              <td>Rust, C++20, x86-64 ELF tooling, CI verification</td>
+            </tr>
+            <tr>
+              <th scope="row">Contact</th>
+              <td><a href="mailto:alex.laros@proton.me">alex.laros@proton.me</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Status</th>
+              <td>Open to software and systems roles</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 1: Flagship Technical Dossier Spread -->
+    <section id="work" class="section-band">
+      <div class="container">
+        <p class="section-label">Selected work</p>
+        <h2 class="section-heading">Flagship build: x86-64 binary ISA auditing</h2>
+
+        <article class="dossier-plate">
+          <div class="dossier-head">
+            <h3>isa-audit</h3>
+            <span class="dossier-status">Shipped v0.1.0 / MIT License / Zero external crates</span>
+          </div>
+
+          <div class="dossier-split">
+            <div class="dossier-copy">
+              <p>
+                A single stray <code>FMA3</code>, <code>AVX2</code>, or <code>AVX-512</code> instruction in a cold branch crashes older CPUs with <code>SIGILL</code>. <code>isa-audit</code> parses x86-64 ELF64 executables and object files directly in safe Rust (<code>#![forbid(unsafe_code)]</code>), decodes legacy, REX, VEX2, VEX3, and EVEX encodings, and fails CI with the exact section, virtual address, symbol offset, and raw bytes.
+              </p>
+              <p>
+                Built to verify portable release binaries and instruction-lowering passes such as targeting non-FMA AVX hosts (<code>--target avx-no-fma</code>).
+              </p>
+
+              <ul class="spec-list" aria-label="Measured isa-audit specifications">
+                <li>
+                  <span class="k">Decode throughput</span>
+                  <span class="v">281.6 MiB/s (70.1M insns/s)</span>
+                </li>
+                <li>
+                  <span class="k">Binary footprint</span>
+                  <span class="v">427 KB stripped release</span>
+                </li>
+                <li>
+                  <span class="k">Dependencies / unsafe</span>
+                  <span class="v">0 crates / forbidden</span>
+                </li>
+                <li>
+                  <span class="k">Verification oracle</span>
+                  <span class="v">6 live g++ -O2 kernels + objdump</span>
+                </li>
+                <li>
+                  <span class="k">CI report formats</span>
+                  <span class="v">Text, JSON, SARIF 2.1.0</span>
+                </li>
+              </ul>
+
+              <div class="action-row">
+                <a class="btn btn-accent" href="case-studies/isa-audit.html">Read full case study</a>
+                <a class="btn" href="https://github.com/alexander-src/isa-audit" target="_blank" rel="noopener noreferrer">Browse source on GitHub</a>
+              </div>
+            </div>
+
+            <!-- Live Captured Output Inspector -->
+            <div class="inspector" role="region" aria-label="Captured isa-audit command outputs">
+              <div class="inspector-tabs" role="tablist" aria-label="Output format views">
+                <button id="tab-cli" class="inspector-tab" type="button" role="tab" aria-selected="true" aria-controls="panel-cli" tabindex="0">CLI check</button>
+                <button id="tab-json" class="inspector-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-json" tabindex="-1">JSON</button>
+                <button id="tab-sarif" class="inspector-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-sarif" tabindex="-1">SARIF 2.1.0</button>
+                <button id="tab-bench" class="inspector-tab" type="button" role="tab" aria-selected="false" aria-controls="panel-bench" tabindex="-1">Benchmark</button>
+              </div>
+
+              <pre id="panel-cli" class="inspector-output" role="tabpanel" aria-labelledby="tab-cli"><span class="out-cmd">$ isa-audit check demo.o --target avx-no-fma</span>
+isa-audit report: demo.o
+  min-profile   : x86-64-v3
+  sections      : 1 (21 bytes decoded, 6 instructions, 0 recovery steps)
+  policy-status : <span class="out-emph">FAIL</span> (violations: 1)
+
+ISA Feature Breakdown:
+  FEATURE                   COUNT    STATUS
+  ------------------------------------------
+  AVX                           4        ok
+  x86-64 (SSE/SSE2)             1        ok
+  FMA3                          1   <span class="out-emph">FORBIDDEN</span>
+
+Forbidden Instruction Sites (showing 1 of 1):
+  0x000000000008  FMA3  vfmadd  vector_fma+0x8  [c4 e2 75 98 06]</pre>
+
+              <pre id="panel-json" class="inspector-output" role="tabpanel" aria-labelledby="tab-json" hidden><span class="out-cmd">$ isa-audit check demo.o --target avx-no-fma --format json</span>
+{
+  "tool": "isa-audit",
+  "version": "0.1.0",
+  "path": "demo.o",
+  "passed": false,
+  "min_profile": "x86-64-v3",
+  "total_bytes_scanned": 21,
+  "total_instructions": 6,
+  "invalid_steps": 0,
+  "total_violations": 1,
+  "features": { "baseline": 1, "avx": 4, "fma3": 1 },
+  "findings": [
+    {
+      "feature": "fma3",
+      "mnemonic": "vfmadd",
+      "section": ".text",
+      "vaddr": "0x8",
+      "symbol": "vector_fma",
+      "symbol_offset": 8,
+      "bytes": "c4 e2 75 98 06"
+    }
+  ]
+}</pre>
+
+              <pre id="panel-sarif" class="inspector-output" role="tabpanel" aria-labelledby="tab-sarif" hidden><span class="out-cmd">$ isa-audit check demo.o --target avx-no-fma --format sarif</span>
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [{
+    "tool": { "driver": { "name": "isa-audit", "version": "0.1.0" } },
+    "results": [{
+      "ruleId": "isa-audit/forbidden-fma3",
+      "level": "error",
+      "message": {
+        "text": "Forbidden FMA3 instruction (vfmadd) at 0x8 (.text in vector_fma+0x8) [c4 e2 75 98 06]"
+      }
+    }]
+  }]
+}</pre>
+
+              <pre id="panel-bench" class="inspector-output" role="tabpanel" aria-labelledby="tab-bench" hidden><span class="out-cmd">$ isa-audit bench /usr/bin/objdump --iterations 100</span>
+isa-audit benchmark: /usr/bin/objdump
+  executable bytes : 274050 (65085 instructions/pass)
+  iterations       : 100
+  elapsed          : 0.0928 s
+  throughput       : 281.61 MiB/s (70.13 M insns/s)
+
+<span class="out-cmd">$ isa-audit scan ./target/release/isa-audit</span>
+  min-profile   : x86-64-v1
+  sections      : 4 (341751 bytes decoded, 86343 instructions, 0 recovery steps)</pre>
+
+              <div class="inspector-caption">
+                Captured directly from the compiled v0.1.0 binary on Linux x86-64 (GCC 16.2.1 test kernel and system <code>/usr/bin/objdump</code>).
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 2: Active Tracks & Open Source Ledger (Distinct Visual Rhythm) -->
+    <section id="tracks" class="section-band">
+      <div class="container">
+        <p class="section-label">Active tracks &amp; open source</p>
+        <h2 class="section-heading">What is in progress next</h2>
+
+        <div class="ledger">
+          <div class="ledger-row">
+            <div class="ledger-tag">Wave 2 / In specification</div>
+            <div class="ledger-main">
+              <h3>Compiler-grounded C++ triage agent and eval harness</h3>
+              <p>
+                An AST-indexed agent for large C++20 codebases that compiles and tests every candidate patch inside a sandboxed loop, paired with a public golden evaluation suite measuring pass@1, token cost, and caught regressions.
+              </p>
+            </div>
+            <div class="ledger-action">
+              <span class="dossier-status">Coming soon</span>
+            </div>
+          </div>
+
+          <div class="ledger-row">
+            <div class="ledger-tag">Wave 3 / Planned</div>
+            <div class="ledger-main">
+              <h3>CI ISA regression telemetry service</h3>
+              <p>
+                A deployed web service ingesting JSON and SARIF reports from <code>isa-audit</code> to track per-commit instruction regressions across builds, backed by Postgres migrations, authentication, and load-tested API routes.
+              </p>
+            </div>
+            <div class="ledger-action">
+              <span class="dossier-status">Planned</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="oss-pr-ledger" class="ledger" style="margin-top: 32px;">
+          <div class="ledger-row">
+            <div class="ledger-tag">Open source / Active focus</div>
+            <div class="ledger-main">
+              <h3>boykopovar/AnyPS5 binary relinking ecosystem</h3>
+              <p>
+                Studying C++20 x86-64 binary relinking and <code>--to-avx</code> instruction-lowering verification. No upstream PRs are merged under <code>@alexander-src</code> yet; merged pull requests will be listed here with direct links as they land.
+              </p>
+            </div>
+            <div class="ledger-action">
+              <a href="https://github.com/boykopovar/AnyPS5" target="_blank" rel="noopener noreferrer">Open upstream repo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Two-Column Editorial Prose (Not a 3-Card AI Template) -->
+    <section id="method" class="section-band">
+      <div class="container essay-grid">
+        <div>
+          <p class="section-label">How I work with AI</p>
+          <h2 class="section-heading">Fast generation only counts when verification catches real bugs.</h2>
+        </div>
+
+        <div class="essay-body">
+          <p>
+            Writing boilerplate by hand is slow, so I use coding agents to draft modules and test harnesses quickly. Before an agent writes implementation code, I write a short <strong>SPEC.md</strong> and <strong>ARCHITECTURE.md</strong> that fix the data structures, safety boundaries, and exit codes. That keeps architecture decisions in my hands instead of letting a model invent abstractions on the fly.
+          </p>
+          <p>
+            The real test is what happens when generated code meets real tools. During <code>isa-audit</code> development, synthetic unit tests passed on the first run, yet compiling real object files with <code>g++ -c -mfma</code> exposed a missing symbol bug on <code>ET_REL</code> sections at offset <code>0x0</code>, and auditing our own Rust binary with <code>objdump</code> caught 26 false positives caused by baseline <code>tzcnt</code> (<code>rep bsf</code>). Both bugs, their disassembly traces, and their fixes are documented in the <a href="case-studies/isa-audit.html" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px;">isa-audit case study</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Capabilities & Contact -->
+    <section id="contact" class="section-band">
+      <div class="container bottom-grid">
+        <div>
+          <p class="section-label">Technical profile</p>
+          <h2 class="section-heading">Tools and languages</h2>
+
+          <table class="cap-table">
+            <tbody>
+              <tr>
+                <th scope="row">Systems</th>
+                <td>Rust, C++20, x86-64 ISA (SSE, AVX, AVX2, FMA3, BMI, AVX-512), ELF64</td>
+              </tr>
+              <tr>
+                <th scope="row">Tooling &amp; OS</th>
+                <td>Linux, GCC, GNU objdump, CMake, Cargo, Clippy, Bash</td>
+              </tr>
+              <tr>
+                <th scope="row">Web &amp; Scripts</th>
+                <td>Python 3, TypeScript, semantic HTML5, CSS, JSON and SARIF CLI outputs</td>
+              </tr>
+              <tr>
+                <th scope="row">Verification</th>
+                <td>Spec-driven AI workflows, compiler test oracles, truncation fuzzing, GitHub Actions CI</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="contact-box">
+          <h2>Get in touch</h2>
+          <p>
+            <span data-profile-location>Open to remote and global roles</span>. Email directly, inspect the source repositories on GitHub, or print the 1-page ATS CV.
+          </p>
+          <div class="action-row">
+            <a id="contact-email-link" class="btn btn-accent" href="mailto:alex.laros@proton.me">alex.laros@proton.me</a>
+            <button id="copy-email-btn" class="btn" type="button">Copy email</button>
+            <a class="btn" href="cv.html">Printable CV</a>
+            <a id="contact-linkedin-link" class="btn" href="#" target="_blank" rel="noopener noreferrer" hidden>LinkedIn</a>
+          </div>
+          <div id="copy-feedback" class="live-feedback" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><span data-profile-name>Alexander</span> (<code>alexander-src</code>)</div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="cv.html">Printable CV</a>
+        <a href="case-studies/isa-audit.html">isa-audit case study</a>
+        <a href="https://github.com/alexander-src" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="mailto:alex.laros@proton.me">alex.laros@proton.me</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
