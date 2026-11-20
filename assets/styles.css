@@ -1,0 +1,874 @@
+/* ==========================================================================
+   alexander-src.github.io — Archival Technical Monograph Stylesheet
+   Dials: ENERGY 2 / RHYTHM 3 / MOTION 1
+   All color pairings verified via contrast-check.py (WCAG AA >= 4.5:1 text,
+   >= 3.0:1 interactive control boundaries in both light and dark modes).
+   ========================================================================== */
+
+:root {
+  --bg: #f6f4ee;
+  --surface: #ffffff;
+  --surface-code: #ece8df;
+  --surface-hover: #eae5da;
+  --ink: #161513;
+  --ink-2: #4a4640;
+  --ink-muted: #5e5951;
+  --rule: #d6d0c4;
+  --control-border: #8f887c;
+  --accent: #a83214;
+  --accent-ink: #ffffff;
+  --accent-tint: #f4e6e1;
+
+  --font-display: "Iowan Old Style", "Charter", "Palatino Linotype", Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --max-w: 1080px;
+}
+
+[data-theme="dark"] {
+  --bg: #141311;
+  --surface: #1d1b18;
+  --surface-code: #100f0d;
+  --surface-hover: #26231f;
+  --ink: #f0ede6;
+  --ink-2: #bdb7ac;
+  --ink-muted: #a0998d;
+  --rule: #2e2b26;
+  --control-border: #6e685e;
+  --accent: #e8744f;
+  --accent-ink: #141311;
+  --accent-tint: #2a1c17;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  overflow-x: clip;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Base interaction affordances (R-39, R-32) */
+a[href],
+button:not(:disabled),
+summary,
+select:not(:disabled),
+label[for],
+[role="tab"],
+[role="button"] {
+  cursor: pointer;
+}
+
+button:disabled,
+select:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 12px 16px;
+  background: var(--ink);
+  color: var(--bg);
+  font-weight: 600;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 clamp(18px, 4vw, 36px);
+}
+
+/* ==========================================================================
+   Header & Responsive Navigation (R-03, R-24, R-32)
+   Compact non-intrusive bar, labeled mobile Menu button with >=44px targets.
+   ========================================================================== */
+.site-header {
+  border-bottom: 1px solid var(--rule);
+  background-color: var(--bg);
+}
+
+.nav-bar {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.wordmark:hover {
+  color: var(--accent);
+}
+
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-desktop a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 10px;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+  border-radius: var(--radius-sm);
+}
+
+.nav-desktop a:hover {
+  color: var(--ink);
+  background-color: var(--surface-hover);
+}
+
+.nav-desktop a:active {
+  background-color: var(--rule);
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.mobile-drawer {
+  border-top: 1px solid var(--rule);
+  padding: 12px 0 18px;
+  background-color: var(--bg);
+}
+
+.mobile-drawer a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 4px;
+  font-size: 1rem;
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+}
+
+.mobile-drawer a:last-child {
+  border-bottom: none;
+}
+
+.mobile-drawer a:hover {
+  color: var(--accent);
+}
+
+/* Controls / Buttons (>= 44px touch target on all viewports) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--control-border);
+  background-color: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.2;
+  transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.btn:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--ink);
+}
+
+.btn:active {
+  background-color: var(--rule);
+}
+
+.btn-accent {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.btn-accent:hover {
+  background-color: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+.btn-accent:active {
+  opacity: 0.9;
+}
+
+.btn-quiet {
+  background-color: transparent;
+  border-color: var(--control-border);
+  color: var(--ink);
+  padding: 8px 14px;
+  font-size: 0.86rem;
+}
+
+/* ==========================================================================
+   Masthead (Asymmetric 2-Column Editorial Hero)
+   ========================================================================== */
+.masthead {
+  padding: clamp(40px, 7vw, 84px) 0 clamp(36px, 6vw, 68px);
+  border-bottom: 2px solid var(--ink);
+}
+
+.masthead-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.95fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: end;
+}
+
+.masthead h1 {
+  margin: 0 0 18px;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 4.8vw, 3.45rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.masthead-lead {
+  margin: 0 0 28px;
+  font-size: clamp(1.02rem, 1.4vw, 1.12rem);
+  color: var(--ink-2);
+  max-width: 56ch;
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Right-side Datasheet Metadata Ledger */
+.facts-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid var(--ink);
+  font-size: 0.88rem;
+}
+
+.facts-table tr {
+  border-bottom: 1px solid var(--rule);
+}
+
+.facts-table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink-muted);
+  padding: 10px 14px 10px 0;
+  width: 96px;
+  vertical-align: top;
+}
+
+.facts-table td {
+  padding: 10px 0;
+  color: var(--ink);
+}
+
+.facts-table a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.facts-table a:hover {
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Section 1: Flagship Dossier Spread (Asymmetric Split + Real Output Inspector)
+   ========================================================================== */
+.section-band {
+  padding: clamp(44px, 7vw, 80px) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.section-band:last-of-type {
+  border-bottom: none;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 10px;
+}
+
+.section-heading {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.dossier-plate {
+  margin-top: 28px;
+  background-color: var(--surface);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: clamp(20px, 3.5vw, 36px);
+}
+
+.dossier-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.dossier-head h3 {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  font-weight: 700;
+}
+
+.dossier-status {
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  color: var(--ink-muted);
+}
+
+.dossier-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(22px, 4vw, 40px);
+  align-items: start;
+}
+
+.dossier-copy p {
+  margin: 0 0 16px;
+  color: var(--ink-2);
+}
+
+.spec-list {
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.spec-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.9rem;
+}
+
+.spec-list .k {
+  color: var(--ink-muted);
+}
+
+.spec-list .v {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--ink);
+  text-align: right;
+}
+
+/* Output Inspector (Clean Technical Plate, NOT a fake macOS terminal) */
+.inspector {
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius-md);
+  background-color: var(--surface-code);
+  min-width: 0;
+}
+
+.inspector-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 8px;
+  border-bottom: 1px solid var(--rule);
+  background-color: var(--surface);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.inspector-tab {
+  min-height: 44px;
+  padding: 8px 13px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--ink-2);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.inspector-tab:hover {
+  color: var(--ink);
+  background-color: var(--surface-hover);
+}
+
+.inspector-tab[aria-selected="true"] {
+  background-color: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.inspector-output {
+  margin: 0;
+  padding: 18px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.inspector-caption {
+  padding: 8px 16px;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+.out-cmd {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.out-emph {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ==========================================================================
+   Section 2: Index Ledger (Rule-Separated Rows, NOT Copy-Paste Cards)
+   ========================================================================== */
+.ledger {
+  margin-top: 24px;
+  border-top: 2px solid var(--ink);
+}
+
+.ledger-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 0.45fr) minmax(0, 1.55fr) auto;
+  gap: 16px 28px;
+  align-items: baseline;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.ledger-tag {
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.ledger-main h3 {
+  margin: 0 0 6px;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.ledger-main p {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 0.94rem;
+  max-width: 64ch;
+}
+
+.ledger-action a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ledger-action a:hover {
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Section 3: Two-Column Editorial Essay (How AI Is Verified)
+   ========================================================================== */
+.essay-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.4fr);
+  gap: clamp(24px, 5vw, 60px);
+  align-items: start;
+}
+
+.essay-body p {
+  margin: 0 0 18px;
+  color: var(--ink-2);
+  font-size: 1.02rem;
+  max-width: 62ch;
+}
+
+.essay-body p:last-child {
+  margin-bottom: 0;
+}
+
+.essay-body strong {
+  color: var(--ink);
+}
+
+.inline-code,
+code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  padding: 1px 5px;
+  border-radius: 2px;
+  background-color: var(--surface-code);
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Section 4: Capabilities & Contact Specification Block
+   ========================================================================== */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+}
+
+.cap-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid var(--ink);
+  margin-top: 16px;
+}
+
+.cap-table tr {
+  border-bottom: 1px solid var(--rule);
+}
+
+.cap-table th {
+  text-align: left;
+  padding: 12px 16px 12px 0;
+  width: 155px;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  vertical-align: top;
+}
+
+.cap-table td {
+  padding: 12px 0;
+  font-size: 0.94rem;
+  color: var(--ink);
+}
+
+.contact-box {
+  padding: 24px;
+  background-color: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+}
+
+.contact-box h2 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.contact-box p {
+  margin: 0 0 20px;
+  color: var(--ink-2);
+  font-size: 0.95rem;
+}
+
+.live-feedback {
+  margin-top: 12px;
+  min-height: 1.4em;
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Case Study Reading Layout
+   ========================================================================== */
+.article-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(36px, 6vw, 64px) clamp(18px, 4vw, 28px) 80px;
+}
+
+.article-wrap h1 {
+  margin: 10px 0 16px;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.2vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.article-wrap h2 {
+  margin: 44px 0 14px;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+}
+
+.article-wrap h3 {
+  margin: 26px 0 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.article-wrap p,
+.article-wrap li {
+  color: var(--ink-2);
+}
+
+.article-wrap strong {
+  color: var(--ink);
+}
+
+.article-wrap pre {
+  padding: 16px;
+  overflow-x: auto;
+  background-color: var(--surface-code);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.article-wrap pre code {
+  padding: 0;
+  background: transparent;
+}
+
+.diagram-frame {
+  margin: 24px 0;
+  padding: 18px;
+  background-color: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+.note-box {
+  margin: 24px 0;
+  padding: 16px 18px;
+  background-color: var(--accent-tint);
+  border-left: 3px solid var(--accent);
+  color: var(--ink);
+}
+
+.table-scroll {
+  overflow-x: auto;
+  margin: 18px 0;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+}
+
+.data-table th {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  border-bottom: 2px solid var(--ink);
+}
+
+/* Footer (Compact Single Band, Real Links Only) */
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding: 28px 0 40px;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 24px;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+
+.footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink-2);
+}
+
+.footer-nav a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints (3 Real States: Desktop, Tablet <=960px, Phone <=640px)
+   ========================================================================== */
+@media (max-width: 960px) {
+  .masthead-grid,
+  .dossier-split,
+  .essay-grid,
+  .bottom-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ledger-row {
+    grid-template-columns: minmax(120px, 0.5fr) minmax(0, 1.5fr);
+  }
+
+  .ledger-action {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-desktop {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .ledger-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 18px 0;
+  }
+
+  .ledger-action {
+    grid-column: auto;
+  }
+
+  .cap-table th {
+    width: 118px;
+  }
+
+  .spec-list li {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .spec-list .v {
+    text-align: left;
+  }
+}
+
+/* Respect user motion settings (R-39) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
