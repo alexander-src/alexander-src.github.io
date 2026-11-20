@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  const POINT_COUNT = 36000;
+  const POINT_COUNT = 52000;
   const FALLBACK_POINTS = 2600;
   const PI2 = Math.PI * 2;
 
@@ -199,21 +199,21 @@ void main() {
     pos.z += influence * 0.34;
   }
 
-  // Perspective camera
-  float camZ = 4.35;
+  // Perspective camera (dramatic full-bleed sculptural scale)
+  float camZ = 4.15;
   float z = camZ - pos.z;
   float invZ = 1.0 / max(0.65, z);
-  vec2 projected = pos.xy * (1.72 * invZ) * uAspect;
+  vec2 projected = pos.xy * (2.06 * invZ) * uAspect;
 
   gl_Position = vec4(projected, clamp(pos.z * 0.22, -0.98, 0.98), 1.0);
 
-  // Depth-attenuated photographic grain point size
-  float depthNorm = clamp((pos.z + 2.1) / 4.2, 0.0, 1.0);
-  float baseSize = (0.95 + aSeed.y * 1.65) * (0.55 + depthNorm * 0.95);
-  gl_PointSize = clamp(baseSize * uDpr, 1.0, 4.5 * uDpr);
+  // Depth-attenuated crisp luminous grain point size
+  float depthNorm = clamp((pos.z + 2.0) / 3.9, 0.0, 1.0);
+  float baseSize = (1.35 + aSeed.y * 2.15) * (0.68 + depthNorm * 1.05);
+  gl_PointSize = clamp(baseSize * uDpr, 1.2, 5.2 * uDpr);
 
   vDepth = depthNorm;
-  vSparkle = 0.72 + 0.28 * sin(uTime * 1.8 + aSeed.x * 31.4159);
+  vSparkle = 0.78 + 0.22 * sin(uTime * 1.9 + aSeed.x * 31.4159);
   vTint = aSeed.z;
 }
 `;
@@ -232,20 +232,20 @@ void main() {
   float r2 = dot(c, c);
   if (r2 > 0.25) discard;
 
-  // Crisp glowing pinpoint core with soft halo falloff
-  float core = exp(-r2 * 22.0);
-  float halo = exp(-r2 * 7.5) * 0.42;
+  // High-contrast glowing core with bright additive density ridges
+  float core = exp(-r2 * 14.0) * 1.45;
+  float halo = exp(-r2 * 5.2) * 0.62;
   float intensity = (core + halo) * vSparkle;
 
-  // Luminous ice-white foreground receding into cool silver-violet mist
-  vec3 farCol = vec3(0.46, 0.44, 0.72);
-  vec3 midCol = mix(vec3(0.74, 0.78, 0.94), vec3(0.84, 0.76, 0.98), vTint);
-  vec3 nearCol = vec3(0.98, 0.99, 1.0);
+  // Ice-white luminous ridges receding into cool silver-violet mist
+  vec3 farCol = vec3(0.52, 0.48, 0.80);
+  vec3 midCol = mix(vec3(0.84, 0.87, 0.98), vec3(0.90, 0.82, 1.0), vTint);
+  vec3 nearCol = vec3(1.0, 1.0, 1.0);
 
-  vec3 col = mix(farCol, midCol, smoothstep(0.05, 0.62, vDepth));
-  col = mix(col, nearCol, smoothstep(0.55, 0.98, vDepth));
+  vec3 col = mix(farCol, midCol, smoothstep(0.04, 0.55, vDepth));
+  col = mix(col, nearCol, smoothstep(0.45, 0.92, vDepth));
 
-  float alpha = clamp(intensity * (0.14 + vDepth * 0.62), 0.0, 0.92);
+  float alpha = clamp(intensity * (0.28 + vDepth * 0.68), 0.0, 0.96);
   fragColor = vec4(col * alpha, alpha);
 }
 `;

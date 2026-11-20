@@ -404,9 +404,9 @@ button:focus-visible,
   grid-row: 2;
   align-self: center;
   padding: 20px 22px;
-  border: 1px solid rgba(99, 104, 122, 0.35);
-  border-radius: var(--radius-xs);
-  background: rgba(6, 7, 11, 0.78);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: radial-gradient(ellipse at center, rgba(3, 3, 6, 0.86) 45%, rgba(3, 3, 6, 0.42) 100%);
   display: flex;
   flex-direction: column;
   gap: 20px;
