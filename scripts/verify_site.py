@@ -93,6 +93,7 @@ def main() -> int:
         "assets/styles.css",
         "assets/main.js",
         "assets/favicon.svg",
+        "assets/webgl-field.js",
         "case-studies/isa-audit.html",
     ]
     errors: list[str] = []
@@ -100,11 +101,16 @@ def main() -> int:
         if not (ROOT / rel).exists():
             errors.append(f"missing required file: {rel}")
 
+    # Enforce zero em dashes across HTML, Markdown, CSS, and JS files (R-02)
+    for ext in ("*.html", "*.md", "*.css", "*.js"):
+        for f in sorted(ROOT.rglob(ext)):
+            raw = f.read_text(encoding="utf-8")
+            if "\u2014" in raw or "&mdash;" in raw:
+                errors.append(f"{f.relative_to(ROOT)}: contains forbidden em dash (R-02)")
+
     html_files = sorted(ROOT.rglob("*.html"))
     for page in html_files:
         raw = page.read_text(encoding="utf-8")
-        if "\u2014" in raw or "&mdash;" in raw:
-            errors.append(f"{page.relative_to(ROOT)}: contains forbidden em dash (R-02)")
         auditor = PageAuditor(page)
         auditor.feed(raw)
         if not auditor.has_lang:
