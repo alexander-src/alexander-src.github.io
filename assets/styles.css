@@ -277,6 +277,10 @@ button:focus-visible,
   font-size: 0.86rem;
 }
 
+.btn.menu-toggle {
+  display: none;
+}
+
 /* ==========================================================================
    Masthead (Asymmetric 2-Column Editorial Hero)
    ========================================================================== */
@@ -834,7 +838,7 @@ code {
     display: none;
   }
 
-  .menu-toggle {
+  .btn.menu-toggle {
     display: inline-flex;
   }
 
