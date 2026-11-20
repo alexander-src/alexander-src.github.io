@@ -93,7 +93,7 @@ def main() -> int:
         "assets/styles.css",
         "assets/main.js",
         "assets/favicon.svg",
-        "assets/webgl-field.js",
+        "assets/decoder-demo.js",
         "case-studies/isa-audit.html",
     ]
     errors: list[str] = []

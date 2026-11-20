@@ -1,184 +1,132 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Case Study: isa-audit | Alexander (alexander-src)</title>
-  <meta name="description" content="Architecture, compiler-oracle verification, and two real x86-64/ELF debugging postmortems from building isa-audit in zero-dependency Rust.">
+  <title>isa-audit write-up, Alexander (alexander-src)</title>
+  <meta name="description" content="Architecture, live GCC ground-truth testing, and two real x86-64 and ELF bugs caught while building isa-audit in safe Rust.">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:wght@500;600&display=swap">
   <link rel="stylesheet" href="../assets/styles.css">
   <script src="../assets/profile.js" defer></script>
   <script src="../assets/main.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to main content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="doc-header">
-    <nav class="doc-nav" aria-label="Case study navigation">
-      <div class="doc-nav-links">
-        <a href="../index.html">ALEXANDER-SRC / 3D INDEX</a>
-        <a href="#architecture">ARCHITECTURE</a>
-        <a href="#bugs">BUGS CAUGHT</a>
-        <a href="#benchmarks">BENCHMARKS</a>
+  <div class="page">
+    <header class="site-header">
+      <div class="header-row">
+        <a class="site-name" href="../index.html" data-profile-name>Alexander</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="../index.html">Home</a>
+          <a href="../cv.html">CV</a>
+          <a href="https://github.com/alexander-src/isa-audit" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <button id="theme-toggle" class="theme-btn" type="button" aria-pressed="false">Dark</button>
+        </nav>
       </div>
-      <div style="display: flex; gap: 10px; align-items: center;">
-        <button id="theme-toggle" class="ctrl-btn" type="button" aria-pressed="false">LIGHT MODE</button>
-        <a class="ctrl-btn ctrl-btn-solid" href="../cv.html">CV / PDF</a>
-      </div>
-    </nav>
-  </header>
+    </header>
 
-  <main id="main" class="article-wrap">
-    <p class="dossier-kicker">STUDY 01 / TECHNICAL CASE STUDY</p>
-    <h1>Building <code>isa-audit</code>: Zero-Dependency x86-64 ELF Verification at 281 MiB/s</h1>
-    <p>
-      How upfront constraints and live <code>g++</code> and <code>objdump</code> checks produced a 427 KB safe-Rust binary auditor and uncovered two real x86-64 and ELF defects that synthetic unit tests missed.
-    </p>
+    <main id="main" class="article">
+      <h1>Two real x86-64 and ELF bugs that synthetic unit tests missed</h1>
+      <p class="article-meta">
+        November 2026 &middot; Engineering write-up for <a href="https://github.com/alexander-src/isa-audit" target="_blank" rel="noopener noreferrer">isa-audit</a>
+      </p>
 
-    <div class="dossier-actions" style="margin: 22px 0 32px;">
-      <a class="ctrl-btn ctrl-btn-solid" href="https://github.com/alexander-src/isa-audit" target="_blank" rel="noopener noreferrer">VIEW SOURCE ON GITHUB</a>
-      <a class="ctrl-btn" href="../index.html">RETURN TO 3D PORTFOLIO</a>
-    </div>
+      <p>
+        When compiling portable Linux releases or writing binary relinkers and instruction-lowering passes (such as lowering FMA3 or AVX2 down to baseline AVX), a single unlowered instruction in a rarely executed branch raises <code>SIGILL</code> on older CPUs. Standard unit tests only catch code paths that actually run.
+      </p>
+      <p>
+        To verify binaries statically in CI, I built <a href="https://github.com/alexander-src/isa-audit" target="_blank" rel="noopener noreferrer">isa-audit</a>: a zero-dependency, <code>#![forbid(unsafe_code)]</code> Rust tool that parses x86-64 ELF64 binaries, resynchronizes on <code>STT_FUNC</code> symbol boundaries, decodes legacy, REX, VEX, and EVEX instructions, and emits Text, JSON, or GitHub Code Scanning SARIF 2.1.0 reports.
+      </p>
 
-    <h2>1. Problem and Constraints</h2>
-    <p>
-      When compiling portable Linux releases or writing binary relinkers and instruction-lowering passes (such as lowering <code>FMA3</code> or <code>AVX2</code> down to baseline <code>AVX</code>), a single unlowered instruction in a rarely reached branch raises <code>SIGILL</code> on older CPUs. Standard unit tests only exercise executed paths.
-    </p>
-    <p>
-      Before implementation began, <code>docs/SPEC.md</code> locked down four non-negotiable rules:
-    </p>
-    <ul>
-      <li>Zero external crates (<code>[dependencies]</code> stays empty) for instant offline builds and minimal binary size.</li>
-      <li>Memory safety enforced at compile time via <code>#![forbid(unsafe_code)]</code> with bounds-checked slice reads and checked arithmetic on every ELF offset.</li>
-      <li>Clean CI exit codes (<code>0</code> pass, <code>1</code> policy violation, <code>2</code> I/O or malformed ELF error) with Text, RFC 8259 JSON, and SARIF 2.1.0 outputs.</li>
-      <li>Ground-truth verification against live C++ kernels compiled with <code>g++ -O2</code> across six distinct <code>-m*</code> flag sets.</li>
-    </ul>
+      <h2>Design constraints set before writing code</h2>
+      <ul>
+        <li>Zero external crates in <code>Cargo.toml</code> so offline builds stay under a second and the stripped binary stays small (427 KB).</li>
+        <li><code>#![forbid(unsafe_code)]</code> across the entire crate with checked arithmetic and slice bounds on every ELF header and section offset.</li>
+        <li>Exit code <code>0</code> on pass, <code>1</code> on forbidden ISA instruction, and <code>2</code> on I/O or malformed ELF input.</li>
+        <li>Integration tests that compile real C++ kernels with <code>g++ -O2</code> across six different <code>-m*</code> flag combinations instead of relying only on hand-crafted byte arrays.</li>
+      </ul>
 
-    <h2 id="architecture">2. Architecture</h2>
-    <div class="diagram-frame">
-      <svg viewBox="0 0 720 130" width="720" height="130" style="max-width: 100%; height: auto;" role="img" aria-label="Pipeline from src/elf.rs ELF64 parser to src/analyzer.rs section scanner to src/decoder.rs x86-64 decoder to src/report.rs report engine">
-        <defs>
-          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--accent)"/>
-          </marker>
-        </defs>
-        <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
-          <rect x="6" y="20" width="152" height="88" rx="3" fill="var(--void)" stroke="var(--control-border)"/>
-          <text x="82" y="46" text-anchor="middle" fill="var(--accent)" font-size="11" font-weight="700">src/elf.rs</text>
-          <text x="82" y="66" text-anchor="middle" fill="var(--ink)" font-size="11">ELF64 Parser</text>
-          <text x="82" y="84" text-anchor="middle" fill="var(--ink-muted)" font-size="9.5">SHF_EXECINSTR +</text>
-          <text x="82" y="97" text-anchor="middle" fill="var(--ink-muted)" font-size="9.5">.symtab/.dynsym</text>
+      <h2>Bug 1: Symbol attribution dropped on relocatable object files</h2>
+      <p>
+        The initial ELF64 symbol loader ignored entries where <code>st_value == 0</code> to filter out undefined external imports. Every synthetic linked <code>ET_EXEC</code> test passed because <code>.text</code> started at virtual address <code>0x401000</code>.
+      </p>
+      <p>
+        As soon as the GCC ground-truth test compiled a real object file (<code>g++ -c -O2 -mavx -mfma -o kernel.o</code>), attribution for <code>fma3_kernel</code> silently returned <code>None</code>. In <code>ET_REL</code> object files, the first function in <code>.text</code> legitimately lives at offset <code>0x0</code>, and multiple executable sections can share offset <code>0x0</code>.
+      </p>
+      <p>
+        <strong>Fix:</strong> Replaced the heuristic with proper ELF semantics (<code>st_shndx != SHN_UNDEF</code>) and scoped symbol lookups by <code>(section_index, vaddr)</code> so symbols in separate relocatable sections never collide.
+      </p>
 
-          <line x1="158" y1="64" x2="188" y2="64" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-          <rect x="192" y="20" width="156" height="88" rx="3" fill="var(--void)" stroke="var(--control-border)"/>
-          <text x="270" y="46" text-anchor="middle" fill="var(--accent)" font-size="11" font-weight="700">src/analyzer.rs</text>
-          <text x="270" y="66" text-anchor="middle" fill="var(--ink)" font-size="11">Section Scanner</text>
-          <text x="270" y="84" text-anchor="middle" fill="var(--ink-muted)" font-size="9.5">STT_FUNC resync</text>
-          <text x="270" y="97" text-anchor="middle" fill="var(--ink-muted)" font-size="9.5">symbol attribution</text>
-
-          <line x1="348" y1="64" x2="378" y2="64" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-          <rect x="382" y="20" width="156" height="88" rx="3" fill="var(--void)" stroke="var(--accent)"/>
-          <text x="460" y="46" text-anchor="middle" fill="var(--accent)" font-size="11" font-weight="700">src/decoder.rs</text>
-          <text x="460" y="66" text-anchor="middle" fill="var(--ink)" font-size="11">x86-64 Decoder</text>
-          <text x="460" y="84" text-anchor="middle" fill="var(--ink-muted)" font-size="9.5">REX/VEX2/VEX3/EVEX</text>
-          <text x="460" y="97" text-anchor="middle" fill="var(--ink-muted)" font-size="9.5">zero-alloc hot loop</text>
-
-          <line x1="538" y1="64" x2="568" y2="64" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-          <rect x="572" y="20" width="142" height="88" rx="3" fill="var(--void)" stroke="var(--control-border)"/>
-          <text x="643" y="46" text-anchor="middle" fill="var(--accent)" font-size="11" font-weight="700">src/report.rs</text>
-          <text x="643" y="66" text-anchor="middle" fill="var(--ink)" font-size="11">Report Engine</text>
-          <text x="643" y="84" text-anchor="middle" fill="var(--ink-muted)" font-size="9.5">Text / RFC 8259</text>
-          <text x="643" y="97" text-anchor="middle" fill="var(--ink-muted)" font-size="9.5">JSON / SARIF 2.1</text>
-        </g>
-      </svg>
-    </div>
-
-    <ul>
-      <li><strong>Function-boundary resynchronization:</strong> When <code>.symtab</code> or <code>.dynsym</code> provides <code>STT_FUNC</code> spans, <code>analyzer.rs</code> restarts decoding at every function boundary so inline jump tables or inter-function padding cannot desynchronize subsequent functions.</li>
-      <li><strong>Stack-only hot loop:</strong> <code>decode_one(&amp;[u8]) -&gt; DecodedInsn</code> performs zero heap allocations per instruction and only materializes <code>Finding</code> records on forbidden instructions.</li>
-      <li><strong>Strict 64-bit encoding validation:</strong> Rejects illegal combinations (such as legacy <code>0x66</code> before VEX <code>0xC4</code>, VEX map values outside <code>1..=3</code>, or EVEX prefixes missing <code>P1.bit2 == 1</code>) and handles no-ModRM VEX exceptions like <code>vzeroupper</code> (<code>C5 F8 77</code>).</li>
-    </ul>
-
-    <h2 id="bugs">3. Two Real Bugs Caught by Verification</h2>
-    <p>
-      AI coding assistance accelerated opcode dispatch tables, header parsing, and CLI scaffolding. However, two subtle defects passed every initial unit test and only surfaced when testing against real GCC output and real Linux binaries.
-    </p>
-
-    <h3>Bug 1: Symbol attribution dropped on <code>ET_REL</code> object files</h3>
-    <p>
-      The initial symbol loader skipped entries with <code>st_value == 0</code> to filter undefined external imports. That passed synthetic linked <code>ET_EXEC</code> binaries (where <code>.text</code> sits at <code>0x401000</code>), but failed when <code>tests/gcc_ground_truth.rs</code> compiled a real <code>g++ -c -mfma</code> object file (<code>.o</code>). In relocatable object files, the first function in <code>.text</code> legitimately starts at offset <code>0x0</code>, so attribution silently returned <code>None</code>.
-    </p>
-    <p>
-      <strong>Fix:</strong> Filtered undefined imports using proper ELF rules (<code>st_shndx != SHN_UNDEF</code>) and scoped symbol lookups by <code>(section_index, vaddr)</code> so multiple executable sections starting at offset <code>0x0</code> inside an <code>ET_REL</code> file never collide.
-    </p>
-
-    <h3>Bug 2: 26 false positives from baseline <code>tzcnt</code> (<code>F3 0F BC</code>)</h3>
-    <p>
-      Following standard opcode tables, the decoder initially mapped <code>F3 0F BC</code> (<code>tzcnt</code>) to <code>BMI1</code>. Scanning <code>isa-audit</code>'s own release binary immediately caught the problem: it claimed a baseline <code>x86-64-v1</code> Rust binary required <code>x86-64-v3</code> with 26 <code>BMI1</code> violations. Inspecting address <code>0x36574</code> with <code>objdump -d</code> showed why:
-    </p>
-    <pre><code>36570: 85 c0          test   %eax,%eax
+      <h2>Bug 2: 26 false positives from baseline <code>tzcnt</code></h2>
+      <p>
+        Following standard opcode tables, the decoder initially mapped <code>F3 0F BC</code> (<code>tzcnt</code>) to BMI1. Auditing <code>isa-audit</code>'s own release binary caught the flaw immediately: it claimed a baseline <code>x86-64-v1</code> Rust binary required <code>x86-64-v3</code> because of 26 BMI1 instructions. Inspecting address <code>0x36574</code> in <code>objdump -d</code> showed why:
+      </p>
+      <pre><code>36570: 85 c0          test   %eax,%eax
 36572: 74 0e          je     36582
 36574: f3 0f bc c0    tzcnt  %eax,%eax   ; executes as rep bsf on pre-BMI1 CPUs</code></pre>
-    <p>
-      On pre-BMI1 x86-64 CPUs, <code>F3 0F BC</code> executes as <code>REP BSF</code> without raising <code>#UD</code> or <code>SIGILL</code>, and yields identical results for non-zero inputs. Reclassifying <code>F3 0F BC</code> as <code>Baseline</code> (<code>tzcnt/rep-bsf</code>) removed all 26 false positives while keeping strict detection for faulting VEX-encoded BMI1 instructions (<code>andn</code>, <code>blsr</code>, <code>blsmsk</code>, <code>blsi</code>, <code>bextr</code>).
-    </p>
+      <p>
+        On pre-BMI1 x86-64 CPUs, <code>F3 0F BC</code> executes as <code>rep bsf</code> without raising <code>#UD</code> or <code>SIGILL</code> and returns the same result for non-zero inputs. Rust and LLVM intentionally emit it behind a zero check in baseline builds. Reclassifying <code>F3 0F BC</code> as baseline eliminated all 26 false positives while preserving strict detection for faulting VEX-encoded BMI1 instructions (<code>andn</code>, <code>blsr</code>, <code>blsmsk</code>, <code>blsi</code>, <code>bextr</code>).
+      </p>
 
-    <div class="note-box">
-      <strong>Lesson:</strong> Hand-written unit tests check what you assumed. Real compiler output (<code>g++</code>) and real disassembly (<code>objdump</code>) check what actually runs on x86-64 silicon.
-    </div>
+      <h2>Measured benchmarks</h2>
+      <p>
+        Single-threaded release build measured over 100 iterations on Linux x86-64:
+      </p>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Binary</th>
+              <th>Executable bytes</th>
+              <th>Instructions</th>
+              <th>Recovery steps</th>
+              <th>Throughput</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>isa-audit</code> (self)</td>
+              <td>341,751 B</td>
+              <td>86,343</td>
+              <td>0</td>
+              <td>259.1 MiB/s (68.6M insns/s)</td>
+            </tr>
+            <tr>
+              <td><code>/usr/bin/objdump</code></td>
+              <td>274,050 B</td>
+              <td>65,085</td>
+              <td>0</td>
+              <td>281.6 MiB/s (70.1M insns/s)</td>
+            </tr>
+            <tr>
+              <td><code>/usr/bin/ls</code></td>
+              <td>134,923 B</td>
+              <td>30,891</td>
+              <td>0</td>
+              <td>Verified AVX and AVX-512 vs objdump</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <h2 id="benchmarks">4. Measured Benchmarks</h2>
-    <div class="table-scroll">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Target binary</th>
-            <th>Executable bytes</th>
-            <th>Instructions / pass</th>
-            <th>Recovery steps</th>
-            <th>Measured result</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>./target/release/isa-audit</code></td>
-            <td>341,751 B</td>
-            <td>86,343</td>
-            <td>0</td>
-            <td><strong>259.1 MiB/s</strong> (68.6M insns/s), <code>x86-64-v1</code></td>
-          </tr>
-          <tr>
-            <td><code>/usr/bin/objdump</code></td>
-            <td>274,050 B</td>
-            <td>65,085</td>
-            <td>0</td>
-            <td><strong>281.6 MiB/s</strong> (70.1M insns/s)</td>
-          </tr>
-          <tr>
-            <td><code>/usr/bin/ls</code></td>
-            <td>134,923 B</td>
-            <td>30,891</td>
-            <td>0</td>
-            <td>AVX and AVX-512 offsets cross-checked with <code>objdump</code></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <p>
+        Every commit runs <code>cargo fmt --check</code>, <code>cargo clippy --all-targets -- -D warnings</code>, byte-by-byte ELF truncation fuzzing, six GCC ground-truth kernels, and cross-platform CLI integration tests across Ubuntu, macOS, and Windows in GitHub Actions.
+      </p>
+    </main>
 
-    <p>
-      Every commit runs <code>cargo fmt --check</code>, <code>cargo clippy --all-targets -- -D warnings</code>, byte-by-byte ELF truncation fuzzing, six GCC ground-truth kernels, and CLI exit-code integration tests across Linux, macOS, and Windows via GitHub Actions.
-    </p>
-  </main>
-
-  <footer class="doc-footer">
-    <a href="../index.html">RETURN TO 3D PORTFOLIO</a>
-    <div style="display: flex; gap: 18px;">
-      <a href="../cv.html">PRINTABLE CV</a>
-      <a href="https://github.com/alexander-src/isa-audit" target="_blank" rel="noopener noreferrer">ISA-AUDIT ON GITHUB</a>
-    </div>
-  </footer>
+    <footer class="site-footer">
+      <div class="footer-row">
+        <a href="../index.html">Back to home</a>
+        <div class="footer-actions">
+          <a href="../cv.html">Printable CV</a>
+          <a href="https://github.com/alexander-src/isa-audit" target="_blank" rel="noopener noreferrer">isa-audit on GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>

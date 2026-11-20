@@ -234,7 +234,7 @@
       <a href="index.html">Back to portfolio</a>
       <span>ATS-ready 1-page CV</span>
     </div>
-    <button class="print-btn" type="button" onclick="window.print()">Print / Save as PDF</button>
+    <button class="print-btn" type="button" onclick="window.print()">Print or save as PDF</button>
   </div>
 
   <main>
@@ -263,7 +263,7 @@
         <table class="skills-table">
           <tr>
             <td>Languages</td>
-            <td>Rust, C++20, Python 3, TypeScript / JavaScript, HTML5 / CSS3, Bash</td>
+            <td>Rust, C++20, Python 3, TypeScript, JavaScript, HTML5, CSS3, Bash</td>
           </tr>
           <tr>
             <td>Systems &amp; Binaries</td>
@@ -271,7 +271,7 @@
           </tr>
           <tr>
             <td>AI Engineering</td>
-            <td>Spec-first agent workflows, deterministic compiler/test verification loops, context engineering, evaluation design</td>
+            <td>Spec-first agent workflows, deterministic compiler and test verification loops, context engineering, evaluation design</td>
           </tr>
           <tr>
             <td>Engineering &amp; CI</td>
@@ -285,25 +285,25 @@
 
         <div class="entry">
           <div class="entry-head">
-            <div class="entry-title"><code>isa-audit</code>: x86-64 ELF64 Binary ISA Feature Auditor &amp; CI Gate</div>
-            <div class="entry-meta">Rust (Zero Deps) / github.com/alexander-src/isa-audit</div>
+            <div class="entry-title"><code>isa-audit</code>: x86-64 ELF64 binary ISA feature auditor and CI gate</div>
+            <div class="entry-meta">Rust (Zero deps) &middot; github.com/alexander-src/isa-audit</div>
           </div>
           <div class="entry-sub">Static binary verification CLI for catching accidental SIGILL instructions in portable builds and relinkers</div>
           <ul>
             <li>Built a zero-dependency, <code>#![forbid(unsafe_code)]</code> ELF64 parser and x86-64 decoder supporting legacy, REX, VEX2, VEX3, and EVEX encodings with <code>STT_FUNC</code> boundary resynchronization and a 427 KB stripped binary footprint.</li>
             <li>Measured 281.6 MiB/s (70.1M instructions/sec) single-threaded decode throughput with 0 recovery steps on real Linux binaries (<code>/usr/bin/objdump</code>, <code>/usr/bin/ls</code>, and self-hosted release builds).</li>
             <li>Wrote a deterministic test suite compiling 6 live C++ ISA kernels with <code>g++ -O2</code> plus byte-by-byte ELF truncation fuzzing, catching and fixing two real defects: <code>ET_REL</code> <code>st_value == 0</code> symbol drops and baseline <code>tzcnt</code> (<code>rep bsf</code>) false positives.</li>
-            <li>Implemented target profile checks (<code>x86-64-v1..v4</code>, <code>avx-no-fma</code>) with semantic exit codes and RFC 8259 JSON / GitHub Code Scanning SARIF 2.1.0 output under multi-OS GitHub Actions CI.</li>
+            <li>Implemented target profile checks (<code>x86-64-v1..v4</code>, <code>avx-no-fma</code>) with semantic exit codes, RFC 8259 JSON, and GitHub Code Scanning SARIF 2.1.0 output under multi-OS GitHub Actions CI.</li>
           </ul>
         </div>
 
         <div class="entry">
           <div class="entry-head">
-            <div class="entry-title"><code>alexander-src.github.io</code>: Engineering Portfolio, Case Studies &amp; Printable CV</div>
-            <div class="entry-meta">HTML5 / CSS3 / JS / alexander-src.github.io</div>
+            <div class="entry-title"><code>alexander-src.github.io</code>: Engineering portfolio, write-ups, and printable CV</div>
+            <div class="entry-meta">HTML5, CSS3, JS &middot; alexander-src.github.io</div>
           </div>
           <ul>
-            <li>Designed a zero-framework static portfolio with WCAG-verified light and dark palettes, accessible ARIA tabs, inline SVG architecture diagrams, and single-source profile hydration.</li>
+            <li>Designed a focused single-column static portfolio with WCAG-verified light and dark themes, a browser-based interactive x86-64 instruction byte decoder, and a print-ready 1-page ATS CV.</li>
             <li>Added a Python verification script validating HTML landmarks, local links, security attributes, and copy hygiene before automated GitHub Pages deployment.</li>
           </ul>
         </div>
@@ -314,7 +314,7 @@
         <div class="entry">
           <div class="entry-head">
             <div class="entry-title">x86-64 Binary Relinking Ecosystem (<code>boykopovar/AnyPS5</code>)</div>
-            <div class="entry-meta">C++20 / x86-64 / Open Source</div>
+            <div class="entry-meta">C++20, x86-64, Open Source</div>
           </div>
           <ul>
             <li>Studying C++20 binary relinking, <code>--to-avx</code> instruction-lowering verification, and companion diagnostic tooling aligned with upstream build and AI-disclosure standards.</li>
