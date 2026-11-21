@@ -107,19 +107,34 @@
         </ul>
       </section>
 
+      <section class="section" id="oss">
+        <h2>Open-source contributions</h2>
+        <ul class="item-list">
+          <li>
+            <div class="note-row">
+              <h3><a href="https://github.com/boykopovar/AnyPS5/pull/24623" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5 #24623: index sources once and scan lazily in <code>env_reference</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Eliminated O(N^2) path re-indexing and triple tokenization across 7,766 C++ source files in <code>tools/env_reference.py</code>, cutting <code>--check</code> runtime from 50.56s to 3.92s (~13x speedup) with byte-identical SHA-256 output and all 114 tests passing.
+            </p>
+          </li>
+        </ul>
+      </section>
+
       <section class="section" id="current">
         <h2>Working on next</h2>
         <ul class="item-list">
           <li>
-            <h3>Upstream open-source contributions</h3>
-            <p>
-              Contributing performance and static-analysis fixes to <a href="https://github.com/boykopovar/AnyPS5" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5</a> (C++20/Python x86-64 relinking tooling) and <a href="https://github.com/oxc-project/oxc" target="_blank" rel="noopener noreferrer">oxc-project/oxc</a> (Rust JavaScript/TypeScript linter). Merged pull requests will be linked here as they land under <code>alexander-src</code>.
-            </p>
-          </li>
-          <li>
             <h3>bincompat: Linux ELF portability and hardening gate</h3>
             <p>
               Designing a zero-dependency Rust CLI that parses ELF <code>VERNEED</code>, <code>VERSYM</code>, and <code>DYNSYM</code> tables to pinpoint exact offending <code>GLIBC</code> and <code>GLIBCXX</code> symbols, verify <code>PIE</code>/<code>NX</code>/<code>RELRO</code>/canary hardening flags, and diff binary compatibility regressions in CI.
+            </p>
+          </li>
+          <li>
+            <h3>Upstream Rust and C++20 tooling</h3>
+            <p>
+              Continuing upstream contributions across <a href="https://github.com/boykopovar/AnyPS5" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5</a> and <a href="https://github.com/oxc-project/oxc" target="_blank" rel="noopener noreferrer">oxc-project/oxc</a> (Rust JavaScript/TypeScript linter rules).
             </p>
           </li>
         </ul>
