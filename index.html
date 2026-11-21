@@ -112,6 +112,15 @@
         <ul class="item-list">
           <li>
             <div class="note-row">
+              <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/131" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #131: validate DXContainers and mapped PE section bounds in <code>call_evidence</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Reused <code>resource_inventory.parts()</code> inside <code>tools/call_evidence.py</code> so unordered DXContainer part tables are indexed while overlapping parts and duplicate FourCC tags are rejected, and added <code>_mapped_rva()</code> bounds checks to avoid <code>TypeError</code> crashes and bogus RVAs on unmapped PE overlays, backed by synthetic PE32+ fixtures.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
               <h3><a href="https://github.com/boykopovar/AnyPS5/pull/24986" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5 #24986: reuse access patterns and fast-scan <code>guest_pointer_audit</code></a></h3>
               <span class="note-date">Merged Nov 2026</span>
             </div>

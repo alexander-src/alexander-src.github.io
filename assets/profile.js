@@ -19,6 +19,13 @@ window.PORTFOLIO_PROFILE = {
    */
   mergedPullRequests: [
     {
+      repo: "R0Y00/Xbox2Windows",
+      prNumber: 131,
+      title: "Validate DXContainers and mapped PE section bounds in call_evidence",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/131",
+      impact: "Unified DXContainer validation in tools/call_evidence.py via resource_inventory.parts() and added mapped PE section bounds checks with synthetic PE32+ regression tests."
+    },
+    {
       repo: "boykopovar/AnyPS5",
       prNumber: 24986,
       title: "perf(tools): reuse access patterns and fast-scan guest_pointer_audit",
