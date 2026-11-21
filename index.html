@@ -112,6 +112,15 @@
         <ul class="item-list">
           <li>
             <div class="note-row">
+              <h3><a href="https://github.com/boykopovar/AnyPS5/pull/24986" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5 #24986: reuse access patterns and fast-scan <code>guest_pointer_audit</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Replaced 8,064 per-parameter regex compiles and 4.86M token callbacks in <code>tools/guest_pointer_audit.py</code> with module-level scanners and a non-code trigger scanner, cutting runtime from 3.79s to 0.54s (7.0x faster) across 1,801 C++ files with identical SHA-256 output and 0/50,000 fuzz mismatches.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
               <h3><a href="https://github.com/boykopovar/AnyPS5/pull/24623" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5 #24623: index sources once and scan lazily in <code>env_reference</code></a></h3>
               <span class="note-date">Merged Nov 2026</span>
             </div>

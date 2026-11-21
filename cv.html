@@ -320,12 +320,13 @@
         <h2>Open-Source Contributions</h2>
         <div class="entry">
           <div class="entry-head">
-            <div class="entry-title"><code>boykopovar/AnyPS5</code>: Merged Performance Optimization (<a href="https://github.com/boykopovar/AnyPS5/pull/24623">PR #24623</a>)</div>
+            <div class="entry-title"><code>boykopovar/AnyPS5</code>: Merged Performance Optimizations (<a href="https://github.com/boykopovar/AnyPS5/pull/24623">PR #24623</a>, <a href="https://github.com/boykopovar/AnyPS5/pull/24986">PR #24986</a>)</div>
             <div class="entry-meta">Python, C++20 Tooling &middot; Nov 2026</div>
           </div>
           <ul>
-            <li>Replaced per-file O(N^2) source re-indexing and triple tokenization across 7,766 C++ files in <code>tools/env_reference.py</code> with single-pass path indexing, cached <code>#include</code> resolution, and lazy scanning, reducing <code>--check</code> runtime from 50.56s to 3.92s (~13x speedup) with SHA-256 byte-identical output across all 114 tests.</li>
-            <li>Active open-source contributor targeting Rust and C++20 developer tooling and static-analysis linters (<code>boykopovar/AnyPS5</code>, <code>oxc-project/oxc</code>).</li>
+            <li>Replaced per-file O(N^2) source re-indexing and triple tokenization across 7,766 C++ files in <code>tools/env_reference.py</code> with single-pass path indexing, cached <code>#include</code> resolution, and lazy scanning, cutting <code>--check</code> runtime from 50.56s to 3.92s (~13x speedup) with SHA-256 identical output across 114 tests.</li>
+            <li>Replaced 8,064 per-parameter regex compiles and 4.86M token callbacks in <code>tools/guest_pointer_audit.py</code> with module-level scanners and a trigger-based C++ lexer, cutting runtime from 3.79s to 0.54s (7.0x speedup) across 1,801 C++ files with 0/50,000 fuzz mismatches and 49 passing unit tests.</li>
+            <li>Active contributor targeting Rust binary parsers and C++20/TypeScript developer tooling (<code>boykopovar/AnyPS5</code>, <code>m4b/goblin</code>, <code>oxc-project/oxc</code>).</li>
           </ul>
         </div>
       </section>

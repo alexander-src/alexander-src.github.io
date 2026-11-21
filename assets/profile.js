@@ -20,6 +20,13 @@ window.PORTFOLIO_PROFILE = {
   mergedPullRequests: [
     {
       repo: "boykopovar/AnyPS5",
+      prNumber: 24986,
+      title: "perf(tools): reuse access patterns and fast-scan guest_pointer_audit",
+      url: "https://github.com/boykopovar/AnyPS5/pull/24986",
+      impact: "Cut guest_pointer_audit runtime from 3.79s to 0.54s (7.0x speedup) across 1,801 C++ files with SHA-256 byte-identical text and JSON output."
+    },
+    {
+      repo: "boykopovar/AnyPS5",
       prNumber: 24623,
       title: "perf(tools): index sources once and scan lazily in env_reference",
       url: "https://github.com/boykopovar/AnyPS5/pull/24623",
