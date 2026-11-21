@@ -126,9 +126,9 @@
         <h2>Working on next</h2>
         <ul class="item-list">
           <li>
-            <h3>bincompat: Linux ELF portability and hardening gate</h3>
+            <h3><a href="https://github.com/alexander-src/bincompat" target="_blank" rel="noopener noreferrer">bincompat: Linux ELF portability and hardening gate</a></h3>
             <p>
-              Designing a zero-dependency Rust CLI that parses ELF <code>VERNEED</code>, <code>VERSYM</code>, and <code>DYNSYM</code> tables to pinpoint exact offending <code>GLIBC</code> and <code>GLIBCXX</code> symbols, verify <code>PIE</code>/<code>NX</code>/<code>RELRO</code>/canary hardening flags, and diff binary compatibility regressions in CI.
+              Milestone 1 live on GitHub: zero-dependency, <code>#![forbid(unsafe_code)]</code> Rust CLI (400 KB release binary) parsing ELF64 <code>SHT_DYNAMIC</code>, <code>SHT_DYNSYM</code>, <code>SHT_GNU_VERSYM</code>, and <code>SHT_GNU_VERNEED</code> tables to pinpoint exact offending <code>GLIBC</code>/<code>GLIBCXX</code> symbols and <code>GLIBC_ABI_DT_RELR</code> tags, cross-checked against GNU <code>readelf</code>. Next milestones: <code>PIE</code>/<code>NX</code>/<code>RELRO</code>/canary hardening checks, distro matrix, and <code>diff</code> mode.
             </p>
           </li>
           <li>
