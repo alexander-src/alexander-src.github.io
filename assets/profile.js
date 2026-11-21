@@ -20,6 +20,20 @@ window.PORTFOLIO_PROFILE = {
   mergedPullRequests: [
     {
       repo: "R0Y00/Xbox2Windows",
+      prNumber: 235,
+      title: "Advance scene_records cursor by consumed deflate bytes only",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/235",
+      impact: "Updated scene_records() in tools/resource_inventory.py to advance the scan cursor by consumed raw-DEFLATE bytes rather than the declared span, preventing oversized spans from skipping following shader records, with synthetic regression tests."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
+      prNumber: 231,
+      title: "Fix VOPC classification and inline comments in scan_unsupported_shaders",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/231",
+      impact: "Fixed RDNA 2 v_cmp* opcode classification into VOPC, stripped inline // comments across opcode parsing, and excluded blank/comment-only lines from shader instruction totals with regression tests."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
       prNumber: 192,
       title: "Validate shader records and output stems in extract_shaders",
       url: "https://github.com/R0Y00/Xbox2Windows/pull/192",

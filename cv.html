@@ -320,12 +320,12 @@
         <h2>Open-Source Contributions</h2>
         <div class="entry">
           <div class="entry-head">
-            <div class="entry-title"><code>R0Y00/Xbox2Windows</code>: PE, DXContainer &amp; Shader Tooling (<a href="https://github.com/R0Y00/Xbox2Windows/pull/131">PR #131</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/192">PR #192</a>)</div>
+            <div class="entry-title"><code>R0Y00/Xbox2Windows</code>: PE, DXContainer &amp; RDNA 2 Shader Tooling (<a href="https://github.com/R0Y00/Xbox2Windows/pull/131">#131</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/192">#192</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/231">#231</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/235">#235</a>)</div>
             <div class="entry-meta">Python, PE32+, DXContainer, RDNA 2 &middot; Nov 2026</div>
           </div>
           <ul>
             <li>Unified DXContainer parsing in <code>tools/call_evidence.py</code> through <code>resource_inventory.parts()</code> to handle unordered part-offset tables and reject overlapping or duplicate FourCC sections, and added mapped PE section bounds checking (<code>_mapped_rva()</code>) with synthetic PE32+ overlay regression fixtures.</li>
-            <li>Hardened RPF shader extraction in <code>tools/extract_shaders.py</code> with bounded raw-DEFLATE and <code>XBCH</code> validation, consumed-byte cursor advancement, empty-archive guards, and case-insensitive filename disambiguation backed by 5 synthetic regression tests.</li>
+            <li>Hardened RPF shader scanning and extraction across <code>tools/extract_shaders.py</code>, <code>tools/resource_inventory.py</code>, and <code>tools/scan_unsupported_shaders.py</code> with bounded raw-DEFLATE/<code>XBCH</code> validation, consumed-byte cursor advancement, case-insensitive stem disambiguation, and RDNA 2 <code>VOPC</code> opcode classification with synthetic regression tests.</li>
           </ul>
         </div>
         <div class="entry">
