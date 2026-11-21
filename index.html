@@ -112,6 +112,15 @@
         <ul class="item-list">
           <li>
             <div class="note-row">
+              <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/192" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #192: validate shader records and output stems in <code>extract_shaders</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Hardened RPF shader record scanning in <code>tools/extract_shaders.py</code> by bounding raw-DEFLATE and <code>XBCH</code> inflation, advancing the scan cursor strictly by consumed DEFLATE bytes so oversized spans and false headers cannot skip subsequent shaders, guarding empty archives, and tracking case-insensitive output stems across 5 new synthetic tests.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
               <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/131" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #131: validate DXContainers and mapped PE section bounds in <code>call_evidence</code></a></h3>
               <span class="note-date">Merged Nov 2026</span>
             </div>

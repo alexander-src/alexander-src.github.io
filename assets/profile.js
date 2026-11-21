@@ -20,6 +20,13 @@ window.PORTFOLIO_PROFILE = {
   mergedPullRequests: [
     {
       repo: "R0Y00/Xbox2Windows",
+      prNumber: 192,
+      title: "Validate shader records and output stems in extract_shaders",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/192",
+      impact: "Deferred cursor advancement to validated raw-DEFLATE bytes, enforced XBCH table and size bounds, guarded empty archives, and added case-insensitive output stem disambiguation with 5 synthetic regression tests."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
       prNumber: 131,
       title: "Validate DXContainers and mapped PE section bounds in call_evidence",
       url: "https://github.com/R0Y00/Xbox2Windows/pull/131",
