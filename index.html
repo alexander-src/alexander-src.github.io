@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Alexander (alexander-src)</title>
-  <meta name="description" content="Systems programmer working in Rust and C++20. Low-level x86-64 binary tooling, compiler-verified AI engineering, and printable CV.">
+  <meta name="description" content="Low-level Linux tooling and binary analysis in Rust and C++20. Projects, technical notes, and CV.">
   <meta property="og:title" content="Alexander (alexander-src)">
-  <meta property="og:description" content="Rust and C++20 systems tooling, x86-64 ELF binary auditing, and printable CV.">
+  <meta property="og:description" content="Low-level Linux tooling and binary analysis in Rust and C++20.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://alexander-src.github.io/">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -38,15 +38,15 @@
       <section class="intro">
         <h1 data-profile-name>Alexander</h1>
         <p>
-          Systems programmer working in Rust and C++20. I build low-level Linux tools, study x86-64 binary relinking, and use compiler checks and real binary tests to verify AI-assisted code.
+          Building low-level Linux tooling and binary analysis utilities in Rust and C++20.
         </p>
         <p>
-          You can view my <a href="cv.html">printable 1-page CV</a>, browse my repositories on <a href="https://github.com/alexander-src" target="_blank" rel="noopener noreferrer">GitHub</a>, or email me at <a href="mailto:alex.laros@proton.me">alex.laros@proton.me</a>.
+          <a href="cv.html">CV</a> &middot; <a href="https://github.com/alexander-src" target="_blank" rel="noopener noreferrer">GitHub</a> &middot; <a href="mailto:alex.laros@proton.me">alex.laros@proton.me</a>
         </p>
       </section>
 
       <section class="section" id="projects">
-        <h2>Selected project</h2>
+        <h2>Projects</h2>
 
         <div class="project-head">
           <h3>isa-audit</h3>
@@ -54,10 +54,10 @@
         </div>
 
         <p class="body-p">
-          A zero-dependency x86-64 ELF64 binary auditor and CI gate written in safe Rust (<code>#![forbid(unsafe_code)]</code>). It scans executable ELF sections, decodes legacy, REX, VEX, and EVEX encodings, compares build-to-build ISA regressions via <code>isa-audit diff --fail-on-regression</code>, and fails CI with exact addresses and symbol offsets if forbidden extensions (such as FMA3, AVX2, or AVX-512) slip into portable binaries or instruction-lowering passes.
+          Static x86-64 ELF64 instruction auditor written in safe Rust with zero dependencies. It scans executable ELF sections, decodes legacy, REX, VEX, and EVEX instructions, diffs builds for ISA regressions (<code>isa-audit diff --fail-on-regression</code>), and fails CI with exact addresses and symbol offsets when forbidden instructions slip into a binary.
         </p>
         <p class="body-p">
-          Compiled release binary is 427 KB and decodes <code>/usr/bin/objdump</code> at 281.6 MiB/s (70.1 million instructions per second) with zero recovery steps. Tested in GitHub Actions across Linux, macOS, and Windows alongside six live <code>g++ -O2</code> kernel compilations, with automated prebuilt binaries and SHA-256 checksums published on GitHub Releases.
+          427 KB stripped binary. Decodes <code>/usr/bin/objdump</code> at 281.6 MiB/s (~70M instructions/sec) single-threaded with 0 recovery steps, verified against live <code>g++</code> compilations across x86-64 ISA flags (SSE, AVX, FMA3, AVX2, BMI, AES, SHA-NI, VAES, VPCLMULQDQ).
         </p>
 
         <div class="project-links">
@@ -123,18 +123,18 @@
       </section>
 
       <section class="section" id="current">
-        <h2>Working on next</h2>
+        <h2>In progress</h2>
         <ul class="item-list">
           <li>
-            <h3><a href="https://github.com/alexander-src/bincompat" target="_blank" rel="noopener noreferrer">bincompat: Linux ELF portability and hardening gate</a></h3>
+            <h3><a href="https://github.com/alexander-src/bincompat" target="_blank" rel="noopener noreferrer">bincompat</a></h3>
             <p>
-              Milestone 1 live on GitHub: zero-dependency, <code>#![forbid(unsafe_code)]</code> Rust CLI (400 KB release binary) parsing ELF64 <code>SHT_DYNAMIC</code>, <code>SHT_DYNSYM</code>, <code>SHT_GNU_VERSYM</code>, and <code>SHT_GNU_VERNEED</code> tables to pinpoint exact offending <code>GLIBC</code>/<code>GLIBCXX</code> symbols and <code>GLIBC_ABI_DT_RELR</code> tags, cross-checked against GNU <code>readelf</code>. Next milestones: <code>PIE</code>/<code>NX</code>/<code>RELRO</code>/canary hardening checks, distro matrix, and <code>diff</code> mode.
+              Static ELF64 scanner in safe Rust (400 KB, zero dependencies) that parses <code>SHT_DYNAMIC</code>, <code>SHT_DYNSYM</code>, <code>SHT_GNU_VERSYM</code>, and <code>SHT_GNU_VERNEED</code> to pinpoint which undefined symbols and <code>GLIBC_ABI_DT_RELR</code> tags raise a Linux binary's minimum runtime version. Verified against GNU <code>readelf</code>. Next: binary hardening checks (<code>PIE</code>, <code>NX</code>, <code>RELRO</code>, stack canaries) and <code>diff</code> mode.
             </p>
           </li>
           <li>
-            <h3>Upstream Rust and C++20 tooling</h3>
+            <h3>Upstream tooling</h3>
             <p>
-              Continuing upstream contributions across <a href="https://github.com/boykopovar/AnyPS5" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5</a> and <a href="https://github.com/oxc-project/oxc" target="_blank" rel="noopener noreferrer">oxc-project/oxc</a> (Rust JavaScript/TypeScript linter rules).
+              Contributing performance and static-analysis fixes to <a href="https://github.com/boykopovar/AnyPS5" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5</a> and <a href="https://github.com/oxc-project/oxc" target="_blank" rel="noopener noreferrer">oxc-project/oxc</a>.
             </p>
           </li>
         </ul>

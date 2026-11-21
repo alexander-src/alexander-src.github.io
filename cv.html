@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CV | Alexander (alexander-src)</title>
-  <meta name="description" content="Printable ATS-ready 1-page technical CV for Alexander (alexander-src), Systems and AI-Native Software Engineer.">
+  <meta name="description" content="1-page technical CV for Alexander (alexander-src), Systems Software Engineer.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <script src="assets/profile.js" defer></script>
   <script src="assets/main.js" defer></script>
@@ -231,8 +231,8 @@
 <body>
   <div class="toolbar">
     <div class="toolbar-left">
-      <a href="index.html">Back to portfolio</a>
-      <span>ATS-ready 1-page CV</span>
+      <a href="index.html">Back to home</a>
+      <span>1-page printable CV</span>
     </div>
     <button class="print-btn" type="button" onclick="window.print()">Print or save as PDF</button>
   </div>
@@ -241,7 +241,7 @@
     <article class="sheet">
       <header class="cv-header">
         <h1 class="cv-name" data-profile-name>Alexander</h1>
-        <div class="cv-role" data-profile-role>Systems and AI-Native Software Engineer</div>
+        <div class="cv-role" data-profile-role>Systems Software Engineer</div>
         <div class="cv-links">
           <span data-profile-location>Open to remote and global roles</span>
           &middot; <a href="https://alexander-src.github.io">alexander-src.github.io</a>
@@ -254,7 +254,7 @@
       <section class="cv-section">
         <h2>Summary</h2>
         <p class="cv-summary">
-          Systems software engineer focused on low-level tooling (Rust, C++20, x86-64 ELF binaries) and spec-driven AI-assisted engineering backed by compiler and real-binary verification. Combines AI coding speed with upfront specifications, zero-dependency engineering, and verifiable debugging.
+          Systems programmer building zero-dependency Linux binary analysis tools in Rust and C++20, verified against GCC, GNU readelf, objdump, and byte-level fuzzing.
         </p>
       </section>
 
@@ -267,15 +267,11 @@
           </tr>
           <tr>
             <td>Systems &amp; Binaries</td>
-            <td>x86-64 ISA (SSE, AVX, AVX2, FMA3, BMI, AVX-512), ELF64 format, Linux toolchain, GCC, GNU objdump, CMake</td>
+            <td>x86-64 ISA (SSE, AVX, AVX2, FMA3, BMI, SHA-NI, VAES, AVX-512), ELF64 format, Linux toolchain, GCC, GNU readelf, objdump, CMake</td>
           </tr>
           <tr>
-            <td>AI Engineering</td>
-            <td>Spec-first agent workflows, deterministic compiler and test verification loops, context engineering, evaluation design</td>
-          </tr>
-          <tr>
-            <td>Engineering &amp; CI</td>
-            <td>Git, GitHub Actions (multi-OS CI), SARIF 2.1.0, JSON CLI tooling, truncation fuzzing, benchmarking</td>
+            <td>Testing &amp; CI</td>
+            <td>Git, GitHub Actions (Linux/macOS/Windows CI), SARIF 2.1.0, JSON CLI tooling, truncation fuzzing, benchmarking</td>
           </tr>
         </table>
       </section>
@@ -335,11 +331,11 @@
       </section>
 
       <section class="cv-section">
-        <h2>Engineering Practices</h2>
+        <h2>Verification &amp; Quality</h2>
         <div class="entry">
           <ul>
-            <li>Write explicit specifications (<code>SPEC.md</code>, <code>ARCHITECTURE.md</code>) and invariants before using AI coding tools to generate implementation code.</li>
-            <li>Pair every repository with strict warnings-as-errors linting, real compiler and disassembly oracles, and documented debugging postmortems.</li>
+            <li>Cross-check binary parsers and instruction decoders against live <code>g++</code> output, GNU <code>readelf</code>, and <code>objdump</code> rather than relying only on synthetic fixtures.</li>
+            <li>Enforce <code>cargo fmt --check</code>, <code>clippy -D warnings</code>, byte-by-byte truncation fuzzing, and Linux/macOS/Windows CI on every commit.</li>
           </ul>
         </div>
       </section>

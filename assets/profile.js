@@ -5,7 +5,7 @@
 window.PORTFOLIO_PROFILE = {
   displayName: "Alexander",
   handle: "alexander-src",
-  roleTitle: "Systems and AI-Native Software Engineer",
+  roleTitle: "Systems Software Engineer",
   location: "Open to remote and global roles",
   availability: "Available for software engineering and systems roles",
   email: "alex.laros@proton.me",
