@@ -112,6 +112,33 @@
         <ul class="item-list">
           <li>
             <div class="note-row">
+              <h3><a href="https://github.com/boykopovar/AnyPS5/pull/25164" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5 #25164: update spans incrementally while folding debt fragments</a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Maintained section line spans incrementally during fragment folding in <code>tools/debt_fold.py</code> instead of re-parsing full files on each splice, cutting runtime from 2.873s to 0.508s (5.66x faster) across 1,138 fragments in 163 files with byte-identical output.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
+              <h3><a href="https://github.com/boykopovar/AnyPS5/pull/25162" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5 #25162: skip unneeded env scans and fast-scan C++ tokens in <code>check_conventions</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Skipped unrelated repository-wide environment scans and replaced per-token regex scanning in <code>tools/check_conventions.py</code>, cutting runtime by 7.67x on <code>HEAD~1</code> (0.620s to 0.081s) and 2.71x on <code>HEAD~20</code> across 278 unit tests and 50,000 fuzz cases.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
+              <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/227" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #227: ignore MASM macros/prefixes and inspect JUnit children in <code>form_coverage</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Filtered MASM <code>LOCAL</code> directives and user-defined macros, stripped leading x64 prefixes (<code>lock</code>, <code>rep*</code>), and checked JUnit <code>&lt;failure&gt;</code>/<code>&lt;error&gt;</code>/<code>&lt;skipped&gt;</code> child elements in <code>tools/form_coverage.py</code>.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
               <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/235" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #235: advance <code>scene_records</code> cursor by consumed deflate bytes</a></h3>
               <span class="note-date">Merged Nov 2026</span>
             </div>

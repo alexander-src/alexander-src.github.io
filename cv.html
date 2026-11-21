@@ -320,22 +320,22 @@
         <h2>Open-Source Contributions</h2>
         <div class="entry">
           <div class="entry-head">
-            <div class="entry-title"><code>R0Y00/Xbox2Windows</code>: PE, DXContainer &amp; RDNA 2 Shader Tooling (<a href="https://github.com/R0Y00/Xbox2Windows/pull/131">#131</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/192">#192</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/231">#231</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/235">#235</a>)</div>
+            <div class="entry-title"><code>R0Y00/Xbox2Windows</code>: PE, DXContainer, Coverage &amp; RDNA 2 Tooling (<a href="https://github.com/R0Y00/Xbox2Windows/pull/131">#131</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/192">#192</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/227">#227</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/231">#231</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/235">#235</a>)</div>
             <div class="entry-meta">Python, PE32+, DXContainer, RDNA 2 &middot; Nov 2026</div>
           </div>
           <ul>
-            <li>Unified DXContainer parsing in <code>tools/call_evidence.py</code> through <code>resource_inventory.parts()</code> to handle unordered part-offset tables and reject overlapping or duplicate FourCC sections, and added mapped PE section bounds checking (<code>_mapped_rva()</code>) with synthetic PE32+ overlay regression fixtures.</li>
-            <li>Hardened RPF shader scanning and extraction across <code>tools/extract_shaders.py</code>, <code>tools/resource_inventory.py</code>, and <code>tools/scan_unsupported_shaders.py</code> with bounded raw-DEFLATE/<code>XBCH</code> validation, consumed-byte cursor advancement, case-insensitive stem disambiguation, and RDNA 2 <code>VOPC</code> opcode classification with synthetic regression tests.</li>
+            <li>Unified DXContainer validation in <code>tools/call_evidence.py</code> via <code>resource_inventory.parts()</code> with mapped PE section bounds checks, and fixed MASM macro/prefix parsing and JUnit child-element inspection in <code>tools/form_coverage.py</code>.</li>
+            <li>Hardened RPF shader scanning and extraction across <code>tools/extract_shaders.py</code>, <code>tools/resource_inventory.py</code>, and <code>tools/scan_unsupported_shaders.py</code> with bounded raw-DEFLATE/<code>XBCH</code> validation, consumed-byte cursor advancement, case-insensitive stem disambiguation, and RDNA 2 <code>VOPC</code> opcode classification.</li>
           </ul>
         </div>
         <div class="entry">
           <div class="entry-head">
-            <div class="entry-title"><code>boykopovar/AnyPS5</code>: Merged Performance Optimizations (<a href="https://github.com/boykopovar/AnyPS5/pull/24623">PR #24623</a>, <a href="https://github.com/boykopovar/AnyPS5/pull/24986">PR #24986</a>)</div>
+            <div class="entry-title"><code>boykopovar/AnyPS5</code>: Merged Tooling Performance Optimizations (<a href="https://github.com/boykopovar/AnyPS5/pull/24623">#24623</a>, <a href="https://github.com/boykopovar/AnyPS5/pull/24986">#24986</a>, <a href="https://github.com/boykopovar/AnyPS5/pull/25162">#25162</a>, <a href="https://github.com/boykopovar/AnyPS5/pull/25164">#25164</a>)</div>
             <div class="entry-meta">Python, C++20 Tooling &middot; Nov 2026</div>
           </div>
           <ul>
-            <li>Replaced per-file O(N^2) source re-indexing and triple tokenization across 7,766 C++ files in <code>tools/env_reference.py</code> with single-pass path indexing, cached <code>#include</code> resolution, and lazy scanning, cutting <code>--check</code> runtime from 50.56s to 3.92s (~13x speedup) with SHA-256 identical output across 114 tests.</li>
-            <li>Replaced 8,064 per-parameter regex compiles and 4.86M token callbacks in <code>tools/guest_pointer_audit.py</code> with module-level scanners and a trigger-based C++ lexer, cutting runtime from 3.79s to 0.54s (7.0x speedup) across 1,801 C++ files with 0/50,000 fuzz mismatches and 49 passing unit tests.</li>
+            <li>Cut <code>tools/env_reference.py</code> runtime from 50.56s to 3.92s (~13x speedup) across 7,766 C++ files and <code>tools/guest_pointer_audit.py</code> from 3.79s to 0.54s (7.0x speedup) across 1,801 C++ files with SHA-256 identical outputs and 0/50,000 fuzz mismatches.</li>
+            <li>Sped up <code>tools/check_conventions.py</code> by 7.67x on <code>HEAD~1</code> (0.620s to 0.081s, 278 tests) via scoped env checks and a trigger-based C++ lexer, and sped up <code>tools/debt_fold.py</code> by 5.66x (2.873s to 0.508s across 1,138 fragments) with incremental span updates.</li>
           </ul>
         </div>
       </section>

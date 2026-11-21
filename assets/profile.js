@@ -20,6 +20,13 @@ window.PORTFOLIO_PROFILE = {
   mergedPullRequests: [
     {
       repo: "R0Y00/Xbox2Windows",
+      prNumber: 227,
+      title: "Ignore MASM macros/prefixes and inspect JUnit children in form_coverage",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/227",
+      impact: "Filtered MASM LOCAL directives and macro definitions, stripped x64 prefixes in masm_mnemonics(), and checked JUnit failure/error/skipped children in tools/form_coverage.py."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
       prNumber: 235,
       title: "Advance scene_records cursor by consumed deflate bytes only",
       url: "https://github.com/R0Y00/Xbox2Windows/pull/235",
@@ -45,6 +52,20 @@ window.PORTFOLIO_PROFILE = {
       title: "Validate DXContainers and mapped PE section bounds in call_evidence",
       url: "https://github.com/R0Y00/Xbox2Windows/pull/131",
       impact: "Unified DXContainer validation in tools/call_evidence.py via resource_inventory.parts() and added mapped PE section bounds checks with synthetic PE32+ regression tests."
+    },
+    {
+      repo: "boykopovar/AnyPS5",
+      prNumber: 25164,
+      title: "perf(tools): update spans incrementally while folding debt fragments",
+      url: "https://github.com/boykopovar/AnyPS5/pull/25164",
+      impact: "Cut debt_fold runtime from 2.873s to 0.508s (5.66x speedup) folding 1,138 fragments across 163 debt files with byte-identical output and 0 fuzz mismatches."
+    },
+    {
+      repo: "boykopovar/AnyPS5",
+      prNumber: 25162,
+      title: "perf(tools): skip unneeded env scans and fast-scan C++ tokens in check_conventions",
+      url: "https://github.com/boykopovar/AnyPS5/pull/25162",
+      impact: "Cut check_conventions runtime by 7.67x on HEAD~1 (0.620s to 0.081s) and 2.71x on HEAD~20 with 278 passing tests and 0/50,000 fuzz mismatches."
     },
     {
       repo: "boykopovar/AnyPS5",
