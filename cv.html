@@ -320,22 +320,22 @@
         <h2>Open-Source Contributions</h2>
         <div class="entry">
           <div class="entry-head">
-            <div class="entry-title"><code>R0Y00/Xbox2Windows</code>: PE, DXContainer, Coverage &amp; RDNA 2 Tooling (<a href="https://github.com/R0Y00/Xbox2Windows/pull/131">#131</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/192">#192</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/227">#227</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/231">#231</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/235">#235</a>)</div>
-            <div class="entry-meta">Python, PE32+, DXContainer, RDNA 2 &middot; Nov 2026</div>
+            <div class="entry-title"><code>R0Y00/Xbox2Windows</code>: D3D12.X Runtime, DXIL Signing, RDNA 2 Lowering &amp; PE Tooling (10 merged PRs: <a href="https://github.com/R0Y00/Xbox2Windows/pull/351">#351</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/346">#346</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/306">#306</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/308">#308</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/310">#310</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/227">#227</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/235">#235</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/231">#231</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/192">#192</a>, <a href="https://github.com/R0Y00/Xbox2Windows/pull/131">#131</a>)</div>
+            <div class="entry-meta">C++17, D3D12, DXIL, RDNA 2, Python &middot; Nov 2026</div>
           </div>
           <ul>
-            <li>Unified DXContainer validation in <code>tools/call_evidence.py</code> via <code>resource_inventory.parts()</code> with mapped PE section bounds checks, and fixed MASM macro/prefix parsing and JUnit child-element inspection in <code>tools/form_coverage.py</code>.</li>
-            <li>Hardened RPF shader scanning and extraction across <code>tools/extract_shaders.py</code>, <code>tools/resource_inventory.py</code>, and <code>tools/scan_unsupported_shaders.py</code> with bounded raw-DEFLATE/<code>XBCH</code> validation, consumed-byte cursor advancement, case-insensitive stem disambiguation, and RDNA 2 <code>VOPC</code> opcode classification.</li>
+            <li>Built desktop <code>d3d12_xs.dll</code> (<a href="https://github.com/R0Y00/Xbox2Windows/pull/351">#351</a>) resolving the remaining pre-executable root-signature imports and added in-place <code>dxil.dll</code> container re-signing plus WARP/hardware <code>CreateComputePipelineState</code> and dispatch readback checks (<a href="https://github.com/R0Y00/Xbox2Windows/pull/346">#346</a>).</li>
+            <li>Lowered 49 gfx1013 RDNA 2 shader forms in <code>tools/pixel_aot.py</code> (32-bit int compares, min/max/med3, and bit-exact IEEE-754 <code>v_frexp_mant_f32</code>/<code>v_ldexp_f32</code>) and hardened PE, DXContainer, RPF shader extraction, and coverage tooling across 5 earlier PRs.</li>
           </ul>
         </div>
         <div class="entry">
           <div class="entry-head">
-            <div class="entry-title"><code>boykopovar/AnyPS5</code>: Merged Tooling Performance Optimizations (<a href="https://github.com/boykopovar/AnyPS5/pull/24623">#24623</a>, <a href="https://github.com/boykopovar/AnyPS5/pull/24986">#24986</a>, <a href="https://github.com/boykopovar/AnyPS5/pull/25162">#25162</a>, <a href="https://github.com/boykopovar/AnyPS5/pull/25164">#25164</a>)</div>
+            <div class="entry-title"><code>boykopovar/AnyPS5</code>: Merged Tooling Performance Optimizations (5 merged PRs: <a href="https://github.com/boykopovar/AnyPS5/pull/24623">#24623</a>, <a href="https://github.com/boykopovar/AnyPS5/pull/24986">#24986</a>, <a href="https://github.com/boykopovar/AnyPS5/pull/25157">#25157</a>, <a href="https://github.com/boykopovar/AnyPS5/pull/25162">#25162</a>, <a href="https://github.com/boykopovar/AnyPS5/pull/25164">#25164</a>)</div>
             <div class="entry-meta">Python, C++20 Tooling &middot; Nov 2026</div>
           </div>
           <ul>
-            <li>Cut <code>tools/env_reference.py</code> runtime from 50.56s to 3.92s (~13x speedup) across 7,766 C++ files and <code>tools/guest_pointer_audit.py</code> from 3.79s to 0.54s (7.0x speedup) across 1,801 C++ files with SHA-256 identical outputs and 0/50,000 fuzz mismatches.</li>
-            <li>Sped up <code>tools/check_conventions.py</code> by 7.67x on <code>HEAD~1</code> (0.620s to 0.081s, 278 tests) via scoped env checks and a trigger-based C++ lexer, and sped up <code>tools/debt_fold.py</code> by 5.66x (2.873s to 0.508s across 1,138 fragments) with incremental span updates.</li>
+            <li>Cut <code>env_reference.py</code> runtime from 50.56s to 3.92s (~13x speedup) across 7,766 C++ files and <code>guest_pointer_audit.py</code> from 3.79s to 0.54s (7.0x speedup) across 1,801 files with SHA-256 identical outputs and 0/50,000 fuzz mismatches.</li>
+            <li>Sped up <code>check_conventions.py</code> by 7.67x on <code>HEAD~1</code>, <code>debt_fold.py</code> by 5.66x across 1,138 fragments, and <code>debt_report.py</code> by 2.66x on Linux / 2.27x on Windows 11 NTFS with byte-identical outputs.</li>
           </ul>
         </div>
       </section>

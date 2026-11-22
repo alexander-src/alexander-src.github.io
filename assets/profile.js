@@ -20,6 +20,48 @@ window.PORTFOLIO_PROFILE = {
   mergedPullRequests: [
     {
       repo: "R0Y00/Xbox2Windows",
+      prNumber: 351,
+      title: "runtime: add desktop d3d12_xs.dll shim for root-signature imports",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/351",
+      impact: "Built desktop d3d12_xs.dll exporting D3D12SerializeVersionedRootSignature (clearing only observed 0x03000000 console flags) and D3D12CreateRootSignatureDeserializer, verified across 4 CTest scenarios including live WARP CreateRootSignature and CreateComputePipelineState."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
+      prNumber: 346,
+      title: "shader: re-sign retargeted DXIL containers and verify compute PSO creation",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/346",
+      impact: "Added dxil.dll in-place signing (root_probe --sign), root_device_probe --compute-pso, and live WARP/hardware compute dispatch checks, enabling retargeted dxil-ms-xb2 shaders to pass CreateComputePipelineState and execute with 0 readback mismatches."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
+      prNumber: 310,
+      title: "shader: lower gfx1013 v_frexp_mant_f32 and v_ldexp_f32 in pixel_aot",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/310",
+      impact: "Lowered gfx1013 v_frexp_mant_f32 (_e32/_e64) and v_ldexp_f32 in tools/pixel_aot.py via bit-exact IEEE-754 HLSL helpers verified against 609 C++ edge cases and D3D12 hardware + WARP readback."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
+      prNumber: 308,
+      title: "shader: lower gfx1013 32-bit integer min, max and med3 in pixel_aot",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/308",
+      impact: "Lowered all 14 gfx1013 32-bit integer v_{min,max,min3,max3,med3}_{i32,u32} forms in tools/pixel_aot.py with LLVM binary controls and D3D12 hardware + WARP readback."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
+      prNumber: 306,
+      title: "shader: lower gfx1013 32-bit integer comparisons in pixel_aot",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/306",
+      impact: "Lowered all 32 gfx1013 v_cmp_*_{i32,u32} (_e32/_e64) integer comparison forms in tools/pixel_aot.py with LLVM binary controls and D3D12 hardware + WARP readback."
+    },
+    {
+      repo: "boykopovar/AnyPS5",
+      prNumber: 25157,
+      title: "perf(tools): speed up file scanning and entry labeling in debt_report",
+      url: "https://github.com/boykopovar/AnyPS5/pull/25157",
+      impact: "Cut debt_report runtime by 2.66x on Linux and 2.27x on Windows 11 NTFS (5.889s to 2.592s) with byte-identical text and JSON output across 19 tests."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
       prNumber: 227,
       title: "Ignore MASM macros/prefixes and inspect JUnit children in form_coverage",
       url: "https://github.com/R0Y00/Xbox2Windows/pull/227",

@@ -112,6 +112,42 @@
         <ul class="item-list">
           <li>
             <div class="note-row">
+              <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/351" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #351: add desktop <code>d3d12_xs.dll</code> shim for root-signature imports</a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Implemented <code>src/d3d12_xs_shim.cpp</code> exporting <code>D3D12SerializeVersionedRootSignature</code> (clearing only the observed <code>0x03000000</code> console bits while keeping unobserved flags rejected) and <code>D3D12CreateRootSignatureDeserializer</code>, resolving the remaining pre-executable DLL imports and passing 4 CTest scenarios including live WARP <code>CreateRootSignature</code> and <code>CreateComputePipelineState</code>.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
+              <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/346" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #346: re-sign retargeted DXIL containers and verify compute PSO creation</a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Added in-place <code>dxil.dll</code> signing (<code>root_probe --sign</code>), <code>root_device_probe --compute-pso</code>, and live compute dispatch checks (<code>offscreen_check --compute-root-file</code>) so retargeted <code>dxil-ms-xb2</code> shaders pass desktop <code>CreateComputePipelineState</code> and execute on WARP and NVIDIA GPUs with 0 readback mismatches.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
+              <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/306" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #306, #308, #310: lower 49 gfx1013 RDNA 2 instructions in <code>pixel_aot</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Added HLSL lowering and D3D12 hardware + WARP readback coverage in <code>tools/pixel_aot.py</code> for all 32 32-bit integer comparisons (<a href="https://github.com/R0Y00/Xbox2Windows/pull/306" target="_blank" rel="noopener noreferrer">#306</a>), 14 integer min/max/med3 forms (<a href="https://github.com/R0Y00/Xbox2Windows/pull/308" target="_blank" rel="noopener noreferrer">#308</a>), and bit-exact IEEE-754 <code>v_frexp_mant_f32</code>/<code>v_ldexp_f32</code> (<a href="https://github.com/R0Y00/Xbox2Windows/pull/310" target="_blank" rel="noopener noreferrer">#310</a>).
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
+              <h3><a href="https://github.com/boykopovar/AnyPS5/pull/25157" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5 #25157: speed up file scanning and entry labeling in <code>debt_report</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Eliminated redundant reads and repeated labeling passes in <code>tools/debt_report.py</code>, cutting runtime by 2.66x on Linux and 2.27x on Windows 11 NTFS (5.889s to 2.592s) with byte-identical text and JSON output across 19 tests.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
               <h3><a href="https://github.com/boykopovar/AnyPS5/pull/25164" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5 #25164: update spans incrementally while folding debt fragments</a></h3>
               <span class="note-date">Merged Nov 2026</span>
             </div>
