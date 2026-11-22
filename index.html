@@ -112,6 +112,15 @@
         <ul class="item-list">
           <li>
             <div class="note-row">
+              <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/542" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #542: lower gfx1013 24-bit integer multiplies in <code>pixel_aot</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Lowered all 8 <code>v_mul_{i32_i24,u32_u24,hi_i32_i24,hi_u32_u24}</code> (<code>_e32</code>/<code>_e64</code>) forms in pure 32-bit SM 6.0 HLSL via lazy helpers without requiring 64-bit integer shader ops, verified across 1,000,529 fuzz pairs, LLVM binary round-trips, and batched D3D12 WARP draw checks with 6 wrong-mode and mutated-shader controls.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
               <h3><a href="https://github.com/boykopovar/AnyPS5/pull/25581" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5 #25577–#25581: 2x–5.2x speedups across five CI audit tools</a></h3>
               <span class="note-date">Merged Nov 2026</span>
             </div>

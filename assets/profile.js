@@ -19,6 +19,13 @@ window.PORTFOLIO_PROFILE = {
    */
   mergedPullRequests: [
     {
+      repo: "R0Y00/Xbox2Windows",
+      prNumber: 542,
+      title: "shader: lower gfx1013 24-bit integer multiplies in pixel_aot",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/542",
+      impact: "Lowered all 8 gfx1013 24-bit vector multiply forms (v_mul_{i32_i24,u32_u24,hi_i32_i24,hi_u32_u24} _e32/_e64) in pure 32-bit SM 6.0 HLSL without 64-bit integer shader ops, verified across 1,000,529 fuzz pairs, LLVM binary controls, and D3D12 WARP CI."
+    },
+    {
       repo: "boykopovar/AnyPS5",
       prNumber: 25581,
       title: "perf(tools): fast-scan C++ tokens and reaching definitions in progress",
