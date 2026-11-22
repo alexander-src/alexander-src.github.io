@@ -295,12 +295,12 @@
 
         <div class="entry">
           <div class="entry-head">
-            <div class="entry-title"><code>bincompat</code>: ELF64 Linux binary portability and symbol-version CI gate</div>
+            <div class="entry-title"><code>bincompat</code>: ELF64 Linux binary portability and hardening CI gate</div>
             <div class="entry-meta">Rust (Zero deps) &middot; github.com/alexander-src/bincompat</div>
           </div>
           <ul>
-            <li>Built a zero-dependency, <code>#![forbid(unsafe_code)]</code> ELF64 parser (400 KB stripped binary) joining <code>.dynsym</code>, <code>.gnu.version</code> (hidden-bit masked), and cycle-checked <code>.gnu.version_r</code> chains to attribute exact offending <code>GLIBC</code>/<code>GLIBCXX</code> symbols and <code>GLIBC_ABI_DT_RELR</code> ABI tags under CI policy gates.</li>
-            <li>Verified symbol-for-symbol against GNU <code>readelf</code> on live Linux system binaries and compiled <code>g++</code> executables, plus little/big-endian synthetic ELF64 fixtures and byte-by-byte truncation fuzzing across Linux, macOS, and Windows CI.</li>
+            <li>Built a zero-dependency, <code>#![forbid(unsafe_code)]</code> ELF64 parser (400 KB stripped binary) joining <code>.dynsym</code>, <code>.gnu.version</code> (hidden-bit masked), and cycle-checked <code>.gnu.version_r</code> chains to attribute exact offending <code>GLIBC</code>/<code>GLIBCXX</code> symbols and <code>GLIBC_ABI_DT_RELR</code> tags, plus <code>PIE</code>, <code>RELRO</code>, <code>NX</code>, and stack-canary hardening gates.</li>
+            <li>Verified against GNU <code>readelf</code> on live Linux system binaries and compiled hardened, partial-RELRO, and unhardened <code>g++</code> builds, plus little/big-endian synthetic ELF64 fixtures and byte-by-byte truncation fuzzing across Linux, macOS, and Windows CI.</li>
           </ul>
         </div>
 

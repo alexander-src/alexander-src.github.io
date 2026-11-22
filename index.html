@@ -236,13 +236,13 @@
           <li>
             <h3><a href="https://github.com/alexander-src/bincompat" target="_blank" rel="noopener noreferrer">bincompat</a></h3>
             <p>
-              Static ELF64 scanner in safe Rust (400 KB, zero dependencies) that parses <code>SHT_DYNAMIC</code>, <code>SHT_DYNSYM</code>, <code>SHT_GNU_VERSYM</code>, and <code>SHT_GNU_VERNEED</code> to pinpoint which undefined symbols and <code>GLIBC_ABI_DT_RELR</code> tags raise a Linux binary's minimum runtime version. Verified against GNU <code>readelf</code>. Next: binary hardening checks (<code>PIE</code>, <code>NX</code>, <code>RELRO</code>, stack canaries) and <code>diff</code> mode.
+              Static ELF64 scanner in safe Rust (400 KB, zero dependencies) that parses <code>PT_GNU_RELRO</code>, <code>PT_GNU_STACK</code>, <code>SHT_DYNAMIC</code>, <code>SHT_DYNSYM</code>, <code>SHT_GNU_VERSYM</code>, and <code>SHT_GNU_VERNEED</code> to pinpoint offending <code>GLIBC</code>/<code>GLIBCXX</code> symbols, <code>GLIBC_ABI_DT_RELR</code> tags, and binary hardening flags (<code>PIE</code>, <code>RELRO</code>, <code>NX</code>, stack canaries). Verified against GNU <code>readelf</code> and live <code>g++</code> builds. Next: distro compatibility presets, JSON/SARIF output, and <code>diff</code> mode.
             </p>
           </li>
           <li>
             <h3>Upstream tooling</h3>
             <p>
-              Contributing performance and static-analysis fixes to <a href="https://github.com/boykopovar/AnyPS5" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5</a> and <a href="https://github.com/oxc-project/oxc" target="_blank" rel="noopener noreferrer">oxc-project/oxc</a>.
+              Contributing shader, runtime, performance, and static-analysis fixes to <a href="https://github.com/R0Y00/Xbox2Windows" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows</a>, <a href="https://github.com/boykopovar/AnyPS5" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5</a>, <a href="https://github.com/m4b/goblin" target="_blank" rel="noopener noreferrer">m4b/goblin</a>, and <a href="https://github.com/oxc-project/oxc" target="_blank" rel="noopener noreferrer">oxc-project/oxc</a>.
             </p>
           </li>
         </ul>
