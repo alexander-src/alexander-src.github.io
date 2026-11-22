@@ -112,6 +112,24 @@
         <ul class="item-list">
           <li>
             <div class="note-row">
+              <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/539" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #539: support multi-store and constant-SGPR compute kernels in <code>compute_store_aot</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Extended <code>tools/compute_store_aot.py</code> to lower non-overlapping multi-store raw UAV compute kernels, general 32-bit <code>s_mov_b32</code> / sign-extended <code>s_movk_i32</code> constant SGPRs, <code>s_clause</code> hints, and <code>vmcnt(0)</code> waits, verified with <code>MULTI_FIXED</code>/<code>MULTI_INDEXED</code> fixtures and 7 negative controls on Linux LLVM and Windows D3D12 CI.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
+              <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/538" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #538: track lowered scalar, VOP3P, SDWA and conversion ops in <code>scan_unsupported_shaders</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Stripped <code>_sdwa</code> suffixes and synced <code>KNOWN_RDNA2_BASE_OPCODES</code> and <code>SUPPORTED_INSTRUCTIONS_REGEX</code> with <code>tools/pixel_aot.py</code>, dropping 111 unrecognized and 723 falsely unsupported instructions across 73 shader fixtures to 0 so <code>pso_readiness.py</code> no longer misblocks accepted shaders.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
               <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/521" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #521: add <code>dxil_retarget_probe_hardware</code> GPU signing and dispatch test</a></h3>
               <span class="note-date">Merged Nov 2026</span>
             </div>

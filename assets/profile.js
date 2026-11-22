@@ -20,6 +20,20 @@ window.PORTFOLIO_PROFILE = {
   mergedPullRequests: [
     {
       repo: "R0Y00/Xbox2Windows",
+      prNumber: 539,
+      title: "shader: support multi-store and constant-SGPR compute kernels in compute_store_aot",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/539",
+      impact: "Extended tools/compute_store_aot.py to lower non-overlapping multi-store raw UAV compute kernels, general s_mov_b32/s_movk_i32 constant SGPRs, s_clause hints, and vmcnt(0) waits with MULTI_FIXED/MULTI_INDEXED fixtures and 7 negative controls."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
+      prNumber: 538,
+      title: "scan_unsupported_shaders: track lowered scalar, VOP3P, SDWA and conversion ops",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/538",
+      impact: "Aligned tools/scan_unsupported_shaders.py with pixel_aot.py lowered instructions and _sdwa suffixes, eliminating 111 unrecognized and 723 falsely unsupported instructions across 73 shader fixtures."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
       prNumber: 521,
       title: "shader: add dxil_retarget_probe_hardware test for GPU signing and dispatch",
       url: "https://github.com/R0Y00/Xbox2Windows/pull/521",
