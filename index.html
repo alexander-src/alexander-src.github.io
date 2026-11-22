@@ -112,6 +112,15 @@
         <ul class="item-list">
           <li>
             <div class="note-row">
+              <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/521" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #521: add <code>dxil_retarget_probe_hardware</code> GPU signing and dispatch test</a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Extended <code>tests/dxil_retarget_check.py</code> and <code>CMakeLists.txt</code> with a hardware-adapter CTest (<code>SKIP_RETURN_CODE 77</code>) verifying re-signed <code>dxil-ms-xb2</code> <code>CreateComputePipelineState</code> and live compute dispatch on physical GPUs, verified 10/10 on an NVIDIA RTX 3070 with unsigned and 1-bit-tampered negative controls.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
               <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/351" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #351: add desktop <code>d3d12_xs.dll</code> shim for root-signature imports</a></h3>
               <span class="note-date">Merged Nov 2026</span>
             </div>

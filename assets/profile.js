@@ -20,6 +20,13 @@ window.PORTFOLIO_PROFILE = {
   mergedPullRequests: [
     {
       repo: "R0Y00/Xbox2Windows",
+      prNumber: 521,
+      title: "shader: add dxil_retarget_probe_hardware test for GPU signing and dispatch",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/521",
+      impact: "Added the dxil_retarget_probe_hardware CTest (SKIP_RETURN_CODE 77) exercising re-signed dxil-ms-xb2 PSO creation and live compute dispatch on physical GPUs, verified 10/10 on RTX 3070 with negative controls."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
       prNumber: 351,
       title: "runtime: add desktop d3d12_xs.dll shim for root-signature imports",
       url: "https://github.com/R0Y00/Xbox2Windows/pull/351",
