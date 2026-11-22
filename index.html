@@ -112,6 +112,15 @@
         <ul class="item-list">
           <li>
             <div class="note-row">
+              <h3><a href="https://github.com/boykopovar/AnyPS5/pull/25581" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5 #25577–#25581: 2x–5.2x speedups across five CI audit tools</a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Replaced repeated regex tokenization and redundant filesystem walks in <code>package_headers.py</code> (<a href="https://github.com/boykopovar/AnyPS5/pull/25577" target="_blank" rel="noopener noreferrer">#25577</a>, 3.51x), <code>check_test_registration.py</code> (<a href="https://github.com/boykopovar/AnyPS5/pull/25578" target="_blank" rel="noopener noreferrer">#25578</a>, 4.60x), <code>shader_scan.py</code> (<a href="https://github.com/boykopovar/AnyPS5/pull/25579" target="_blank" rel="noopener noreferrer">#25579</a>, 5.20x), <code>test_public_headers.py</code> (<a href="https://github.com/boykopovar/AnyPS5/pull/25580" target="_blank" rel="noopener noreferrer">#25580</a>, 2.33x), and <code>progress.py</code> (<a href="https://github.com/boykopovar/AnyPS5/pull/25581" target="_blank" rel="noopener noreferrer">#25581</a>, 2.02x), all verified byte-identical by SHA-256 and differential fuzzing.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
               <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/539" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #539: support multi-store and constant-SGPR compute kernels in <code>compute_store_aot</code></a></h3>
               <span class="note-date">Merged Nov 2026</span>
             </div>
@@ -264,6 +273,12 @@
             <h3><a href="https://github.com/alexander-src/bincompat" target="_blank" rel="noopener noreferrer">bincompat</a></h3>
             <p>
               Static ELF64 scanner in safe Rust (400 KB, zero dependencies) that parses <code>PT_GNU_RELRO</code>, <code>PT_GNU_STACK</code>, <code>SHT_DYNAMIC</code>, <code>SHT_DYNSYM</code>, <code>SHT_GNU_VERSYM</code>, and <code>SHT_GNU_VERNEED</code> to pinpoint offending <code>GLIBC</code>/<code>GLIBCXX</code> symbols, <code>GLIBC_ABI_DT_RELR</code> tags, and binary hardening flags (<code>PIE</code>, <code>RELRO</code>, <code>NX</code>, stack canaries). Verified against GNU <code>readelf</code> and live <code>g++</code> builds. Next: distro compatibility presets, JSON/SARIF output, and <code>diff</code> mode.
+            </p>
+          </li>
+          <li>
+            <h3><a href="https://github.com/alexander-src/convto" target="_blank" rel="noopener noreferrer">convto</a></h3>
+            <p>
+              Zero-dependency safe Rust (685 KB) Linux file-manager context menu ("Convert to" and "Shrink / Optimize...") and parallel CLI for KDE Dolphin, GNOME Files, Nemo, and Thunar. Supports magic-byte format sniffing, binary-search image size targeting, two-pass exact-bitrate video shrinking, Ghostscript PDF shrinking, built-in JSON/YAML/TOML/CSV/TSV conversion, and zip-slip-checked archive repacking, plus a native GTK4 interactive shrink dialog.
             </p>
           </li>
           <li>

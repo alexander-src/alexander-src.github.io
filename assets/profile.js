@@ -19,6 +19,41 @@ window.PORTFOLIO_PROFILE = {
    */
   mergedPullRequests: [
     {
+      repo: "boykopovar/AnyPS5",
+      prNumber: 25581,
+      title: "perf(tools): fast-scan C++ tokens and reaching definitions in progress",
+      url: "https://github.com/boykopovar/AnyPS5/pull/25581",
+      impact: "Cut progress.py runtime by 2.02x end-to-end (6.148s to 3.039s, collect_libraries 2.43x) with byte-identical 2.66 MB JSON output across 237 tests and 50,000 fuzz inputs."
+    },
+    {
+      repo: "boykopovar/AnyPS5",
+      prNumber: 25580,
+      title: "perf(test): fast-scan C++ sources and declarations in test_public_headers",
+      url: "https://github.com/boykopovar/AnyPS5/pull/25580",
+      impact: "Cut public_headers_audit runtime by 2.33x (7.000s to 3.002s, ~4.0s saved per CI run) with byte-identical 73,193-byte manifest output across 73 tests and 4x50,000 fuzz inputs."
+    },
+    {
+      repo: "boykopovar/AnyPS5",
+      prNumber: 25579,
+      title: "perf(tools): fast-scan decoder and translator sources in shader_scan",
+      url: "https://github.com/boykopovar/AnyPS5/pull/25579",
+      impact: "Cut shader_scan.py runtime by 5.20x (0.687s to 0.132s) with byte-identical 26,117-byte JSON output across 46 tests and 50,000 fuzz inputs."
+    },
+    {
+      repo: "boykopovar/AnyPS5",
+      prNumber: 25578,
+      title: "perf(tools): avoid duplicate scans and skip AST parsing in check_test_registration",
+      url: "https://github.com/boykopovar/AnyPS5/pull/25578",
+      impact: "Cut check_test_registration.py runtime by 4.60x (0.902s to 0.196s across 4 CI workflows per PR) with byte-identical 34,283-byte JSON output across 110 tests and 75,000 fuzz inputs."
+    },
+    {
+      repo: "boykopovar/AnyPS5",
+      prNumber: 25577,
+      title: "perf(tools): fast-scan headers and cache resolved paths in package_headers",
+      url: "https://github.com/boykopovar/AnyPS5/pull/25577",
+      impact: "Cut package_headers.public_headers() runtime by 3.51x (0.422s to 0.120s) and manifest generation by 2.89x with byte-identical 266,365-byte output across 144 tests and 50,000 fuzz inputs."
+    },
+    {
       repo: "R0Y00/Xbox2Windows",
       prNumber: 539,
       title: "shader: support multi-store and constant-SGPR compute kernels in compute_store_aot",
