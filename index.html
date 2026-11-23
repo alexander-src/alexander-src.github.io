@@ -112,6 +112,15 @@
         <ul class="item-list">
           <li>
             <div class="note-row">
+              <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/838" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #838: lower gfx1013 <code>v_cvt_flr_i32_f32</code> and <code>v_cvt_rpi_i32_f32</code> in <code>pixel_aot</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Decoded VOP1 opcodes <code>0x0c</code>/<code>0x0d</code> (and VOP3 <code>0x18c</code>/<code>0x18d</code>) in <code>tools/disasm_rdna2.py</code> and lowered 4 floor/round-to-nearest-up float-to-int forms in <code>tools/pixel_aot.py</code> with SSA-keyed range provenance checks restricting lowering to finite inputs proven in <code>[-2^31, 2^31)</code> after optional bitwise <code>abs</code>/<code>neg</code> modifiers, backed by LLVM <code>gfx1013</code> round-trips, refusal controls, and D3D12 draw checks.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
               <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/540" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #540: lower gfx1013 <code>v_cvt_u32_f32_e64</code> and <code>v_cvt_i32_f32_e64</code> in <code>pixel_aot</code></a></h3>
               <span class="note-date">Merged Nov 2026</span>
             </div>
@@ -288,9 +297,12 @@
         <h2>In progress</h2>
         <ul class="item-list">
           <li>
-            <h3><a href="https://github.com/alexander-src/bincompat" target="_blank" rel="noopener noreferrer">bincompat</a></h3>
+            <div class="note-row">
+              <h3><a href="https://github.com/alexander-src/bincompat" target="_blank" rel="noopener noreferrer">bincompat</a> (<a href="https://github.com/alexander-src/bincompat/releases/tag/v0.1.0" target="_blank" rel="noopener noreferrer">v0.1.0</a>)</h3>
+              <span class="note-date">Released Nov 2026</span>
+            </div>
             <p>
-              Static ELF64 scanner in safe Rust (400 KB, zero dependencies) that parses <code>PT_GNU_RELRO</code>, <code>PT_GNU_STACK</code>, <code>SHT_DYNAMIC</code>, <code>SHT_DYNSYM</code>, <code>SHT_GNU_VERSYM</code>, and <code>SHT_GNU_VERNEED</code> to pinpoint offending <code>GLIBC</code>/<code>GLIBCXX</code> symbols, <code>GLIBC_ABI_DT_RELR</code> tags, and binary hardening flags (<code>PIE</code>, <code>RELRO</code>, <code>NX</code>, stack canaries). Verified against GNU <code>readelf</code> and live <code>g++</code> builds. Next: distro compatibility presets, JSON/SARIF output, and <code>diff</code> mode.
+              Static ELF64 scanner in safe Rust (549 KB stripped, zero dependencies) that parses <code>PT_GNU_RELRO</code>, <code>PT_GNU_STACK</code>, <code>SHT_DYNAMIC</code>, <code>SHT_DYNSYM</code>, <code>SHT_GNU_VERSYM</code>, and <code>SHT_GNU_VERNEED</code> to pinpoint offending <code>GLIBC</code>/<code>GLIBCXX</code> symbols, <code>GLIBC_ABI_DT_RELR</code> tags, and binary hardening flags (<code>PIE</code>, <code>RELRO</code>, <code>NX</code>, stack canaries). Ships 8 Linux distro baselines (<code>--target</code>), build-to-build <code>diff</code> regression gating, and <code>--format text|json|markdown|sarif</code> (SARIF 2.1.0), verified against GNU <code>readelf</code> and live <code>gcc</code>/<code>g++</code> builds on Linux, macOS, and Windows CI.
             </p>
           </li>
           <li>
