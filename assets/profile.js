@@ -20,6 +20,13 @@ window.PORTFOLIO_PROFILE = {
   mergedPullRequests: [
     {
       repo: "R0Y00/Xbox2Windows",
+      prNumber: 838,
+      title: "shader: lower gfx1013 v_cvt_flr_i32_f32 and v_cvt_rpi_i32_f32 in pixel_aot",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/838",
+      impact: "Decoded VOP1 opcodes 0x0c/0x0d (and VOP3 0x18c/0x18d) in tools/disasm_rdna2.py and lowered 4 floor/round-up float-to-int forms in tools/pixel_aot.py with SSA-keyed range provenance checks restricting lowering to finite inputs proven in [-2^31, 2^31) after optional bitwise abs/neg modifiers."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
       prNumber: 540,
       title: "shader: lower gfx1013 v_cvt_u32_f32_e64 and v_cvt_i32_f32_e64 in pixel_aot",
       url: "https://github.com/R0Y00/Xbox2Windows/pull/540",
