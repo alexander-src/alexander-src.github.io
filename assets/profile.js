@@ -20,6 +20,13 @@ window.PORTFOLIO_PROFILE = {
   mergedPullRequests: [
     {
       repo: "R0Y00/Xbox2Windows",
+      prNumber: 540,
+      title: "shader: lower gfx1013 v_cvt_u32_f32_e64 and v_cvt_i32_f32_e64 in pixel_aot",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/540",
+      impact: "Lowered gfx1013 VOP3 truncating float-to-integer conversions with bitwise IEEE-754 abs/neg source modifiers into shared src/ffx_float_to_int.hlsli helpers, verified bit-for-bit across all 18 edge words on RTX 5070, RTX 3060 Ti, WARP, and LLVM 15/23 controls."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
       prNumber: 542,
       title: "shader: lower gfx1013 24-bit integer multiplies in pixel_aot",
       url: "https://github.com/R0Y00/Xbox2Windows/pull/542",

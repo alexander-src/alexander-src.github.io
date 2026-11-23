@@ -112,6 +112,15 @@
         <ul class="item-list">
           <li>
             <div class="note-row">
+              <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/540" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #540: lower gfx1013 <code>v_cvt_u32_f32_e64</code> and <code>v_cvt_i32_f32_e64</code> in <code>pixel_aot</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Lowered VOP3 truncating float-to-integer conversions with optional bitwise IEEE-754 <code>abs</code>/<code>neg</code> source modifiers on VGPR, SGPR, and hex literal inputs into the shared <code>src/ffx_float_to_int.hlsli</code> helpers, verified bit-for-bit across 18 edge words on RTX 5070, RTX 3060 Ti, WARP, and 14 negative controls.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
               <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/542" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #542: lower gfx1013 24-bit integer multiplies in <code>pixel_aot</code></a></h3>
               <span class="note-date">Merged Nov 2026</span>
             </div>
