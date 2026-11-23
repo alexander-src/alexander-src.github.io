@@ -20,6 +20,13 @@ window.PORTFOLIO_PROFILE = {
   mergedPullRequests: [
     {
       repo: "R0Y00/Xbox2Windows",
+      prNumber: 840,
+      title: "test(shader): extend int16 ternary matrix for all orderings, ties and med3 chain",
+      url: "https://github.com/R0Y00/Xbox2Windows/pull/840",
+      impact: "Extended the int16 ternary draw fixture and independent reference to 12 word sets covering all 6 strict signed/unsigned orderings and all 4 tie patterns plus a chained low16 v_sub_nc_u16 -> v_med3_u16 -> v_med3_i16 -> v_min3_i16 fixture, draw mutations, and v_med3_u16 refusal checks."
+    },
+    {
+      repo: "R0Y00/Xbox2Windows",
       prNumber: 838,
       title: "shader: lower gfx1013 v_cvt_flr_i32_f32 and v_cvt_rpi_i32_f32 in pixel_aot",
       url: "https://github.com/R0Y00/Xbox2Windows/pull/838",
