@@ -19,6 +19,13 @@ window.PORTFOLIO_PROFILE = {
    */
   mergedPullRequests: [
     {
+      repo: "boykopovar/AnyPS5",
+      prNumber: 26148,
+      title: "perf(tools): fast-scan C++ sources and calls in export_gap",
+      url: "https://github.com/boykopovar/AnyPS5/pull/26148",
+      impact: "Cut export_gap.py collect_provided 4.67x (8.66s to 1.85s across 413 PRX modules) and find_self_calls 3.98x with identical SHA-256 outputs, 73,000 differential fuzz checks (0 mismatches), and full CPython 3.12-3.15 Path.suffix compatibility."
+    },
+    {
       repo: "R0Y00/Xbox2Windows",
       prNumber: 840,
       title: "test(shader): extend int16 ternary matrix for all orderings, ties and med3 chain",

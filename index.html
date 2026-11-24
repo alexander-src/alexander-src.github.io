@@ -112,6 +112,15 @@
         <ul class="item-list">
           <li>
             <div class="note-row">
+              <h3><a href="https://github.com/boykopovar/AnyPS5/pull/26148" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5 #26148: fast-scan C++ sources and self-calls in <code>export_gap</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Replaced full-file regex tokenization and <code>Path.rglob</code> walks in <code>tools/export_gap.py</code> with a literal-anchored trigger scanner, <code>os.walk</code> pruning, and O(1) NID/line-splice lookup, speeding up <code>collect_provided</code> 4.67x (8.66s to 1.85s across 413 PRX modules) and <code>find_self_calls</code> 3.98x with identical SHA-256 output across 73,000 differential fuzz checks and CPython 3.12 to 3.15.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
               <h3><a href="https://github.com/R0Y00/Xbox2Windows/pull/840" target="_blank" rel="noopener noreferrer">R0Y00/Xbox2Windows #840: extend int16 ternary matrix for all orderings, ties and <code>med3</code> chain</a></h3>
               <span class="note-date">Merged Nov 2026</span>
             </div>
