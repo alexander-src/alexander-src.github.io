@@ -112,6 +112,15 @@
         <ul class="item-list">
           <li>
             <div class="note-row">
+              <h3><a href="https://github.com/boykopovar/AnyPS5/pull/24889" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5 #24889 &amp; #26151: fast-scan C++ sources in <code>nid_names</code> and <code>env_reference</code></a></h3>
+              <span class="note-date">Merged Nov 2026</span>
+            </div>
+            <p>
+              Replaced full-file regex tokenization and <code>Path.rglob</code> walks with literal-anchored non-code trigger scanners and scope skipping in <code>tools/nid_names.py</code> (<a href="https://github.com/boykopovar/AnyPS5/pull/24889" target="_blank" rel="noopener noreferrer">#24889</a>, 6.11x on <code>collect_real_names</code> from 6.41s to 1.05s, 4.88x on <code>source_locations</code>) and <code>tools/env_reference.py</code> (<a href="https://github.com/boykopovar/AnyPS5/pull/26151" target="_blank" rel="noopener noreferrer">#26151</a>, 4.43x on <code>reads(ROOTS)</code> from 5.79s to 1.31s across 727 env vars), both SHA-256 identical across 240,000+ differential fuzz checks.
+            </p>
+          </li>
+          <li>
+            <div class="note-row">
               <h3><a href="https://github.com/boykopovar/AnyPS5/pull/26148" target="_blank" rel="noopener noreferrer">boykopovar/AnyPS5 #26148: fast-scan C++ sources and self-calls in <code>export_gap</code></a></h3>
               <span class="note-date">Merged Nov 2026</span>
             </div>

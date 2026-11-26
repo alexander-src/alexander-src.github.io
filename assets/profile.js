@@ -20,6 +20,20 @@ window.PORTFOLIO_PROFILE = {
   mergedPullRequests: [
     {
       repo: "boykopovar/AnyPS5",
+      prNumber: 24889,
+      title: "perf(tools): scan non-code tokens and skip ignored scopes in nid_names",
+      url: "https://github.com/boykopovar/AnyPS5/pull/24889",
+      impact: "Replaced full-file CPP_TOKEN tokenization in tools/nid_names.py with literal-anchored non-code trigger scanners and brace-scope skipping, speeding up collect_real_names 6.11x (6.41s to 1.05s across 47,745 items) and source_locations 4.88x (5.77s to 1.18s) with identical SHA-256 outputs."
+    },
+    {
+      repo: "boykopovar/AnyPS5",
+      prNumber: 26151,
+      title: "perf(tools): fast-scan C++ sources and readers in env_reference",
+      url: "https://github.com/boykopovar/AnyPS5/pull/26151",
+      impact: "Cut env_reference.reads(ROOTS) 4.43x (5.79s to 1.31s across 727 documented env vars) using os.walk pruning, a literal-anchored C++ trigger scanner, and anchored constant/reader matching with SHA-256 identical output and 0/240,000 differential fuzz mismatches."
+    },
+    {
+      repo: "boykopovar/AnyPS5",
       prNumber: 26148,
       title: "perf(tools): fast-scan C++ sources and calls in export_gap",
       url: "https://github.com/boykopovar/AnyPS5/pull/26148",
